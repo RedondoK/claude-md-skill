@@ -1,12 +1,12 @@
 # GitHub Flavored Markdown (GFM) Skill
 
-**Version:** 1.0.2  
-**Purpose:** Transform AI markdown generation to be 100% markdownlint-compliant  
+**Version:** 1.0.3
+**Purpose:** Transform AI markdown generation to be 100% markdownlint-compliant
 **Target:** Zero markdownlint violations in all generated markdown
 
 ## Overview
 
-This skill provides comprehensive guidance for generating GitHub Flavored Markdown that passes markdownlint validation without errors. Every markdown file generated using this skill should be immediately usable in VSCode without validation warnings.
+This skill provides comprehensive guidance for generating GitHub Flavored Markdown (GFM) that passes markdownlint validation without errors. Markdown  generated using this skill should be immediately usable in VSCode without validation warnings. This skill is used whenever markdown is generated, unless contrary instructions are given.
 
 ## Core Principles
 
