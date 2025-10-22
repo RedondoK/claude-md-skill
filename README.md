@@ -1,0 +1,231 @@
+# GitHub Flavored Markdown Skill for AI Systems
+
+**Version:** 1.0.2  
+**Status:** Production Ready  
+**Last Updated:** 2025-10-22
+
+## Overview
+
+This skill transforms AI-generated markdown from "close enough" to "perfect."
+It provides comprehensive guidance for creating GitHub Flavored Markdown (GFM)
+that passes markdownlint validation with zero violations.
+
+## Purpose
+
+AI systems frequently generate markdown that looks correct but fails automated
+validation due to missing blank lines, inconsistent formatting, or structural
+issues. This skill eliminates those problems by providing:
+
+- Complete markdownlint rule coverage
+- Pre-generation checklists
+- Post-generation validation steps
+- Common error patterns and corrections
+- Real-world examples and templates
+
+## Key Features
+
+- **Zero Violations Goal:** Generate markdown that passes markdownlint
+  immediately
+- **Comprehensive Rule Coverage:** All critical markdownlint rules documented
+- **Error Prevention:** Catch common mistakes before they happen
+- **Practical Examples:** Correct vs incorrect patterns for every rule
+- **VSCode Compatible:** Works seamlessly with popular validation tools
+
+## Quick Start
+
+### For AI Systems
+
+1. Load `SKILL.md` into your context
+2. Review the pre-generation checklist before creating markdown
+3. Generate markdown following the documented rules
+4. Apply post-generation validation steps
+5. Validate with markdownlint
+
+### For Users
+
+1. Point your AI system to this skill directory
+2. Request markdown generation using the skill
+3. Validate output with: `markdownlint filename.md`
+4. Expect zero violations
+
+## What Problems Does This Solve?
+
+### Before This Skill
+
+```markdown
+Here are the steps:
+- Step 1
+- Step 2
+Let's continue with...
+```
+
+**Result:** MD032 violation (missing blank lines around list)
+
+### After This Skill
+
+```markdown
+Here are the steps:
+
+- Step 1
+- Step 2
+
+Let's continue with...
+```
+
+**Result:** Zero violations
+
+## Directory Structure
+
+```text
+md_skill_md/
+├── SKILL.md                          # Main skill document
+├── README.md                         # This file
+├── USAGE.md                          # Detailed usage guide
+├── QUICK_REFERENCE.md                # One-page cheat sheet
+├── INTEGRATION.md                    # Integration notes
+├── CHANGELOG.md                      # Version history
+├── rules/
+│   ├── markdownlint-rules-reference.md
+│   └── top-ai-violations.md
+├── examples/
+│   ├── correct/
+│   │   ├── basic-document.md
+│   │   ├── complex-nesting.md
+│   │   └── technical-doc.md
+│   └── incorrect/
+│       ├── common-violations.md
+│       └── before-after.md
+└── tests/
+    ├── test-suite.md
+    └── validation-results.txt
+```
+
+## Core Principles
+
+### 1. Blank Lines Are Mandatory
+
+Not optional, not stylistic - **mandatory**:
+
+- Before and after lists
+- Before and after headings (except document start)
+- Before and after code blocks
+- Between all block-level elements
+
+### 2. Consistency Is Required
+
+- One list marker style (`-` recommended)
+- One heading style (ATX `#` recommended)
+- Consistent indentation
+- Predictable patterns
+
+### 3. Structure Matters
+
+- Heading hierarchy increments by one (1→2→3, not 1→3)
+- Only one H1 per document
+- Files end with exactly one newline
+- Proper nesting and indentation
+
+## Common Use Cases
+
+### Technical Documentation
+
+Generate API docs, developer guides, and technical specifications with:
+
+- Clear heading hierarchy
+- Code blocks with language identifiers
+- Lists for features and requirements
+- Proper spacing throughout
+
+### README Files
+
+Create professional README files with:
+
+- Project title (single H1)
+- Section organization (H2 headings)
+- Installation instructions (lists + code)
+- Usage examples (code blocks)
+
+### Tutorials and Guides
+
+Build step-by-step guides with:
+
+- Sequential instructions (ordered lists)
+- Code examples with context
+- Multi-paragraph list items
+- Nested content structures
+
+## Validation
+
+### Recommended Tools
+
+- **markdownlint-cli:** `npm install -g markdownlint-cli`
+- **VSCode Extension:** markdownlint by David Anson
+- **GitHub Actions:** Automated validation in CI/CD
+
+### Validation Command
+
+```bash
+markdownlint filename.md
+```
+
+**Expected Result:** No output (zero violations)
+
+## Success Metrics
+
+- ✅ Zero markdownlint violations
+- ✅ Zero user corrections needed
+- ✅ 100% VSCode compatibility
+- ✅ Immediate usability in production
+
+## Version History
+
+### v1.0.2 (2025-10-22)
+
+- Added MD013 rule documentation (line length)
+- Updated validation checklist
+- Phase 3 testing complete
+
+### v1.0.1 (2025-10-22)
+
+- Fixed all violations in skill document
+- Added comprehensive examples
+- Enhanced error prevention
+
+### v1.0.0 (2025-10-22)
+
+- Initial release
+- Complete markdownlint coverage
+- Pre/post generation checklists
+
+## Contributing
+
+Found a violation pattern not covered? Have a suggestion for improvement?
+
+1. Document the issue with examples
+2. Propose a solution
+3. Test against markdownlint
+4. Submit updates
+
+## Support
+
+For issues or questions:
+
+- Check `USAGE.md` for detailed instructions
+- Review `QUICK_REFERENCE.md` for fast answers
+- Validate with markdownlint to identify specific violations
+- Consult `rules/` directory for rule-specific guidance
+
+## License
+
+This skill is provided as-is for use with AI systems and markdown generation.
+
+## Credits
+
+Built from real-world AI markdown generation failures and markdownlint
+documentation. Tested with actual validation tools to ensure accuracy.
+
+---
+
+**Remember:** The most common violation is missing blank lines. If you remember
+nothing else, remember that blank lines around lists, headings, and code blocks
+are **mandatory**, not optional.
