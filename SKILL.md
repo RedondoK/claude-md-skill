@@ -1,18 +1,23 @@
 # GitHub Flavored Markdown (GFM) Skill
 
-**Version:** 1.0.3
+**Version:** 1.1.1
 **Purpose:** Transform AI markdown generation to be 100% markdownlint-compliant
 **Target:** Zero markdownlint violations in all generated markdown
 
 ## Overview
 
-This skill provides comprehensive guidance for generating GitHub Flavored Markdown (GFM) that passes markdownlint validation without errors. Markdown  generated using this skill should be immediately usable in VSCode without validation warnings. This skill is used whenever markdown is generated, unless contrary instructions are given.
+This skill provides comprehensive guidance for generating GitHub Flavored
+Markdown (GFM) that passes markdownlint validation without errors. Markdown
+generated using this skill should be immediately usable in VSCode without
+validation warnings. This skill is used whenever markdown is generated, unless
+contrary instructions are given.
 
 ## Core Principles
 
 ### 1. Blank Lines Are Not Optional
 
-**CRITICAL:** Blank lines around block elements are MANDATORY, not stylistic choices.
+**CRITICAL:** Blank lines around block elements are MANDATORY, not stylistic
+choices.
 
 Required blank lines:
 
@@ -35,6 +40,19 @@ Required blank lines:
 - Headings must start at line beginning (no indentation)
 - Files must end with exactly one newline
 
+### 4. Invisible Characters Matter
+
+**CRITICAL:** Invisible characters can break markdown parsing in ways that are
+extremely difficult to debug.
+
+Required character encoding:
+
+- Use ONLY regular spaces (U+0020) for indentation, never tabs or non-breaking
+  spaces
+- Non-breaking spaces (U+00A0, `&nbsp;`) break markdown parsing
+- Ensure proper character encoding (UTF-8)
+- Watch for zero-width characters that can break parsing
+
 ## Pre-Generation Checklist
 
 Before generating ANY markdown, mentally review:
@@ -46,6 +64,8 @@ Before generating ANY markdown, mentally review:
 - [ ] What list style will I use? (Stick to `-` throughout)
 - [ ] Does the content need a language identifier for code? (Always specify)
 - [ ] Are any lines too long? (Keep under 80 characters when possible)
+- [ ] Will I need line breaks within paragraphs? (Use two trailing spaces)
+- [ ] Will I use proper spacing? (Regular spaces only, no nbsp or tabs)
 
 ## Generation Rules
 
@@ -193,9 +213,11 @@ Option 2 - Angle brackets (auto-link):
 <https://very-long-url.com/path>
 ```
 
-**Note:** The default limit is 80 characters. Some projects configure this differently (100, 120, or disabled). When generating markdown, assume 80 unless told otherwise.
+**Note:** The default limit is 80 characters. Some projects configure this
+differently (100, 120, or disabled). When generating markdown, assume 80
+unless told otherwise.
 
-### Rule 5: Inline Elements
+### Rule 5: Inline Elements and Line Breaks
 
 **Code spans:**
 
@@ -213,6 +235,23 @@ Option 2 - Angle brackets (auto-link):
 - Standard: `[text](url)`
 - Auto: `<https://example.com>`
 - Reference: `[text][ref]` with `[ref]: url` elsewhere
+- URLs with underscores: Use angle brackets `<http://example.com/__word__/>`
+
+**Line breaks with two trailing spaces:**
+
+**IMPORTANT:** Use two trailing spaces to create line breaks (`<br>` tags)
+within paragraphs or list items WITHOUT starting a new paragraph.
+
+```markdown
+First line of text
+Second line (line break but same paragraph)
+
+New paragraph (blank line creates paragraph break)
+```
+
+This is the standard markdown way to create line breaks. It is NOT an error.
+
+Configure markdownlint MD009 with `br_spaces: 2` to accept this pattern.
 
 ### Rule 6: File Structure
 
@@ -280,6 +319,90 @@ Previous text.
 - [ ] Another task
 
 Following text.
+```
+
+### Rule 8: Character Encoding and Spacing (Critical for AI Generation)
+
+**ALWAYS:**
+
+- Use regular ASCII spaces (U+0020, character code 32) for ALL indentation
+- Never use non-breaking spaces (U+00A0, `&nbsp;`, character code 160)
+- Never use tabs for indentation (use spaces)
+- Use UTF-8 encoding without BOM
+- Avoid zero-width characters (U+200B, U+200C, U+200D, U+FEFF)
+
+**Common Sources of Invisible Characters:**
+
+- **AI/LLM output** - May generate nbsp instead of regular spaces
+- **Copy/paste from web** - Websites often use nbsp in rendered HTML
+- **Word processors** - Documents may contain non-breaking spaces
+- **HTML conversion** - `&nbsp;` entities may not convert properly
+
+**How to Detect:**
+
+In VS Code:
+
+1. View → Render Whitespace (or press `Ctrl+Shift+P` → "View: Toggle Render
+   Whitespace")
+2. Regular spaces appear as small dots: `·`
+3. Non-breaking spaces appear as a different symbol or may not show at all
+4. Tabs appear as arrows: `→`
+
+**How to Fix:**
+
+Find and replace in VS Code:
+
+1. Open Find/Replace (`Ctrl+H`)
+2. Enable regex mode (click `.*` button)
+3. Find: `\u00A0` (matches non-breaking spaces)
+4. Replace: ` ` (regular space)
+5. Click Replace All
+
+Or use this regex to fix indentation in lists:
+
+- Find: `^(\u00A0+)([-*+]|\d+\.)`
+- Replace with proper spaces based on indent level
+
+**Command-line detection:**
+
+```bash
+# Find lines with non-breaking spaces
+grep -n $'\u00A0' filename.md
+
+# Count non-breaking spaces
+grep -o $'\u00A0' filename.md | wc -l
+
+# Show hex dump to see character codes
+od -c filename.md | grep -C2 '240'  # 240 octal = 160 decimal = U+00A0
+```
+
+**Template (Correct):**
+
+```markdown
+- List item with nested code:
+
+   ```python
+   # Three regular spaces before the fence
+   code_here()
+   ```
+
+- Next item
+```
+
+Note: The three spaces before the fence are regular spaces (U+0020), not nbsp
+(U+00A0).
+
+**NEVER:**
+
+```markdown
+- List item with nested code:
+
+   ```python
+   # If these spaces are nbsp, the block won't nest properly!
+   code_here()
+   ```
+
+- Next item will start a new list instead of continuing
 ```
 
 ## Critical Error Prevention
@@ -407,24 +530,52 @@ This document demonstrates correct code block formatting with proper spacing.
 ```markdown
 This document demonstrates correct code block formatting with proper blank
 lines and language identifiers.
-
-**Wrong:**
-
-```markdown
-# Main Title
-
-### Subsection (skipped level 2!)
 ```
 
-**Right:**
+### Error Pattern 7: Invisible Character Issues (Non-Breaking Spaces)
+
+**Wrong (using non-breaking space for indentation):**
+
+Note: The following example uses nbsp (U+00A0) characters which are invisible:
 
 ```markdown
-# Main Title
+- List item
 
-## Section
+   ```python  
+   code()
+   ```
 
-### Subsection
+- Next item (will be renumbered as item 1!)
 ```
+
+**Right (using regular spaces):**
+
+```markdown
+- List item
+
+   ```python
+   code()
+   ```
+
+- Next item (continues properly)
+```
+
+**How This Manifests:**
+
+- MD029: List numbering restarts or is inconsistent
+- MD031: Code blocks reported as not having blank lines
+- List items appear outside of list context in rendered output
+- Nested code blocks don't maintain list numbering
+
+**Prevention:**
+
+1. Configure your editor to show all whitespace
+2. After generating markdown, verify indentation uses regular spaces
+3. Run find/replace to convert nbsp to regular spaces: `\u00A0` → ` `
+4. Use a hex editor or "View > Show Invisible Characters" to diagnose
+
+**This is especially critical for AI-generated markdown** as language models
+may output non-breaking spaces in certain contexts.
 
 ## Language Identifiers for Code Blocks
 
@@ -464,10 +615,10 @@ Proper indentation maintains list context:
 
 2. Second step with code:
 
-   ```python
-   def example():
-       return True
-   ```
+    ```python
+    def example():
+        return True
+    ```
 
 3. Third step
 
@@ -512,13 +663,17 @@ Done.
 After generating markdown, verify:
 
 1. **Lists:** Every list has blank lines before and after
-2. **Headings:** Every heading has blank lines before and after (except document start)
+2. **Headings:** Every heading has blank lines before and after (except
+   document start)
 3. **Code blocks:** Every code block has blank lines before and after
 4. **Heading levels:** Progression is 1→2→3→4, no skipping
 5. **List markers:** All use `-` consistently
 6. **Code languages:** Every code block has a language identifier
 7. **Line length:** Lines under 80 characters (check long descriptions)
 8. **File ending:** File ends with exactly one newline
+9. **Line breaks:** Two trailing spaces used intentionally, not accidentally
+10. **Character encoding:** Only regular spaces used for indentation (no nbsp,
+    no tabs)
 
 ## Mental Model for Generation
 
@@ -587,6 +742,21 @@ text
 - parent
 ```
 
+### Every Time You Need a Line Break
+
+```markdown
+First line
+Second line (note the two spaces after "First line")
+```
+
+### Every Time You Indent (Lists, Code Blocks)
+
+Use regular spaces (U+0020), never:
+
+- Non-breaking spaces (U+00A0, &nbsp;)
+- Tabs
+- Other invisible characters
+
 ## Validation Command
 
 Users will validate generated markdown with:
@@ -633,9 +803,118 @@ Requirements:
 - **100%** VSCode compatibility
 - **Immediate** usability
 
+## Advanced: Edge Cases and Cross-Platform Compatibility
+
+### When to Consult Edge Case Documentation
+
+For advanced users, developers, or when encountering unusual rendering issues,
+consult the comprehensive edge case documentation:
+
+**Resource:** `resources/MARKDOWN_VALIDATION_TRAPS.md`
+
+This document covers:
+
+- Platform-specific differences (GitHub vs VS Code vs CommonMark)
+- Silent failure patterns that pass validation but render incorrectly
+- Table limitations and workarounds
+- Nested structure ambiguities
+- Auto-linking issues and URL escaping
+- Heading anchor generation across parsers
+- HTML mixing complications
+- Line ending considerations (CRLF vs LF)
+- Invisible character traps (non-breaking spaces, zero-width chars)
+
+### Quick Edge Case Reference
+
+**Most common cross-platform issues:**
+
+1. **URLs with underscores:** Use angle brackets
+   `<http://example.com/__test__/>`
+2. **Pipes in tables:** Use HTML entity `&#124;` instead of `|`
+3. **Code blocks in lists:** Indent fences to match list content level
+4. **Line endings:** Use LF only (configure Git: `core.autocrlf input`)
+5. **Nested lists:** Use marker-relative indentation (2 spaces for `-`, 4 for
+   `10.`)
+6. **Link references:** Cannot interrupt paragraphs (need blank line before)
+7. **Duplicate headings:** GitHub appends `-1`, `-2` to anchor IDs
+8. **Complex table content:** Use HTML `<ul>` or `<pre>` tags instead
+9. **Non-breaking spaces:** Use only regular spaces (U+0020) for indentation;
+   nbsp (U+00A0) breaks list/code block nesting. Use `\u00A0` regex to
+   find/replace
+
+### Two-Space Line Break Standard
+
+**This project explicitly uses two trailing spaces for line breaks.**
+
+This is intentional markdown syntax, not trailing whitespace to be removed.
+
+Example use cases:
+
+- Line breaks within list items
+- Poetry or formatted text
+- Address blocks
+- Any situation requiring `<br>` without new paragraph
+
+Markdownlint MD009 should be configured with `br_spaces: 2` to recognize this
+pattern as valid.
+
+### Platform Testing Checklist
+
+Before considering markdown "complete," test on:
+
+- [ ] GitHub (primary target - create gist or draft PR)
+- [ ] VS Code preview (secondary target)
+- [ ] Markdownlint CLI (validation tool)
+- [ ] Your target platform (if different from above)
+
+**Test specifically:**
+
+- [ ] Nested lists render correctly (3 levels)
+- [ ] Code blocks in lists maintain list numbering
+- [ ] Tables with complex content display properly
+- [ ] All links work (including heading anchors)
+- [ ] Line breaks appear where intended (two spaces)
+- [ ] Long URLs don't break layout
+
+### When GitHub Is Not Primary Target
+
+If generating markdown for platforms other than GitHub:
+
+- **VS Code only:** GFM works well, no special considerations
+- **Jekyll/GitHub Pages:** Be aware of Kramdown differences
+- **CommonMark strict:** Avoid GFM extensions (task lists, strikethrough)
+- **General markdown:** Use safe subset (no tables, no task lists)
+
+Consult `resources/MARKDOWN_VALIDATION_TRAPS.md` for platform-specific
+guidance.
+
 ## Version History
 
-### v1.0.2 (2025-10-22)
+### v1.1.1 (2025-10-24)
+
+- **CRITICAL FIX:** Added Core Principle 4 on invisible characters
+- **CRITICAL FIX:** Added Rule 8 on character encoding and spacing
+- Added Error Pattern 7 for non-breaking space issues
+- Updated pre-generation checklist to verify proper spacing
+- Updated post-generation validation to check for invisible characters
+- Added Quick Reference Card for indentation spacing
+- Enhanced Remember section with spacing guidance
+- Updated edge case documentation for nbsp issues
+- Added detection and fix commands for nbsp problems
+- Enhanced documentation for AI-generated markdown pitfalls
+
+### v1.1.0 (2025-10-24)
+
+- Added edge cases and cross-platform compatibility section
+- Added two-space line break standard and guidance
+- Enhanced Rule 5 with line break instructions
+- Updated pre-generation checklist with line break consideration
+- Updated post-generation validation with line break check
+- Added Quick Reference Card for line breaks
+- Created comprehensive edge case documentation in resources/
+- Phase 5 QA complete
+
+### v1.0.3 (2025-10-22)
 
 - Added MD013 rule documentation (line length)
 - Added error pattern for long lines
@@ -643,14 +922,14 @@ Requirements:
 - Updated post-generation validation with line length
 - Phase 3 testing complete with all violations addressed
 
-### v1.0.1 (2025-10-22)
+### v1.0.2 (2025-10-22)
 
 - Fixed MD031 violations (blank lines around code blocks)
 - Fixed MD040 violations (language identifiers)
 - Fixed MD029 violations (ordered list numbering)
 - Corrected all markdownlint violations in skill document
 
-### v1.0.0 (2025-10-22)
+### v1.0.1 (2025-10-22)
 
 - Initial skill creation
 - Complete markdownlint rule coverage
@@ -665,6 +944,7 @@ Reference files in this skill directory:
 - `rules/top-ai-violations.md` - Common mistakes to avoid
 - `examples/correct/` - Correct formatting examples
 - `examples/incorrect/` - What NOT to do
+- `resources/MARKDOWN_VALIDATION_TRAPS.md` - Edge cases and compatibility guide
 
 ## Usage Instructions
 
@@ -673,10 +953,13 @@ Reference files in this skill directory:
 3. Generate markdown with blank line awareness
 4. Apply post-generation validation
 5. Correct any violations immediately
+6. For complex cases, consult edge case documentation
 
 ## Remember
 
-**The most common violation is missing blank lines around lists, headings, and code blocks. If you remember nothing else, remember: BLANK LINES ARE MANDATORY.**
+**The most common violation is missing blank lines around lists, headings, and
+code blocks. If you remember nothing else, remember: BLANK LINES ARE
+MANDATORY.**
 
 When in doubt:
 
@@ -685,5 +968,8 @@ When in doubt:
 3. Use `#` for headings (ATX style)
 4. Specify language for code blocks
 5. Increment heading levels by one
+6. Use two trailing spaces for intentional line breaks
+7. Test on target platform (GitHub, VS Code, etc.)
+8. Use regular spaces only (never nbsp or tabs)
 
 Follow these rules, and your markdown will be perfect.

@@ -5,6 +5,91 @@ All notable changes to this skill will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-10-24
+
+### Added - CRITICAL FIXES
+
+- **CRITICAL:** Added Core Principle 4 on invisible characters and spacing
+- **CRITICAL:** Added Rule 8: Character Encoding and Spacing (AI Generation)
+- **CRITICAL:** Added Error Pattern 7 for non-breaking space (nbsp) issues
+- Added nbsp detection commands (grep, od, hex dump methods)
+- Added nbsp fix procedures (sed, VS Code find/replace regex)
+- Added invisible character documentation to Quick Reference Card
+- Added spacing verification to pre-generation checklist
+- Added character encoding check to post-generation validation
+- Enhanced Remember section with spacing guidance (never nbsp or tabs)
+
+### Changed
+
+- Updated SKILL.md version to 1.1.1
+- Enhanced edge case documentation with nbsp detection
+- Updated Quick Edge Case Reference with nbsp item
+- Improved documentation for AI-generated markdown pitfalls
+
+### Documentation
+
+- Updated resources/MARKDOWN_VALIDATION_TRAPS.md with Invisible Character
+  Traps section
+- Enhanced Defensive Authoring Checklist with spacing verification
+- Updated Safe Markdown Subset with spacing guideline
+- Improved Testing and Validation workflow with nbsp detection step
+
+### Fixed
+
+- Addressed real-world nbsp issue found in SKILL.md itself
+- Prevents MD029 (list numbering) errors caused by nbsp in indentation
+- Prevents MD031 (blank lines) errors caused by nbsp breaking list context
+- Prevents silent failures where code blocks don't nest in lists
+
+### Why This Matters
+
+This update addresses a **critical but invisible** issue: AI language models
+may generate non-breaking space (nbsp, U+00A0) characters instead of regular
+spaces (U+0020) for indentation. These characters look identical to spaces but
+break markdown parsing, causing:
+
+- List numbering to restart unexpectedly
+- Code blocks to fail nesting in lists
+- Confusing validation errors on visually correct markdown
+
+This exact issue was discovered in SKILL.md itself during validation, making
+it a real-world problem that needed immediate documentation and prevention.
+
+**Impact:** HIGH - Prevents hard-to-debug issues in AI-generated content  
+**Priority:** CRITICAL - Essential for reliable markdown generation  
+**Detection:** Added command-line and visual detection methods  
+**Prevention:** Enhanced skill guidance to explicitly avoid nbsp
+
+## [1.1.0] - 2025-10-24
+
+### Added
+
+- Edge cases and cross-platform compatibility section
+- Two-space line break standard and guidance
+- Platform Testing Checklist
+- When GitHub Is Not Primary Target section
+- resources/MARKDOWN_VALIDATION_TRAPS.md comprehensive guide
+
+### Changed
+
+- Enhanced Rule 5 with line break instructions
+- Updated pre-generation checklist with line break consideration
+- Updated post-generation validation with line break check
+- Added Quick Reference Card for line breaks
+
+### Documentation
+
+- Created comprehensive edge case documentation in resources/
+- Documented silent failure patterns
+- Platform-specific guidance (GitHub, VS Code, CommonMark)
+- Added safe markdown subset recommendations
+
+### Quality Assurance
+
+- Phase 5 QA complete
+- Cross-platform validation
+- Edge case testing completed
+
 ## [1.0.2] - 2025-10-22
 
 ### Added
@@ -174,7 +259,7 @@ Format: `MAJOR.MINOR.PATCH`
 
 ## Future Plans
 
-### [1.1.0] - Planned
+### [1.2.0] - Planned
 
 **Advanced Rules:**
 
@@ -200,7 +285,7 @@ Format: `MAJOR.MINOR.PATCH`
 - Auto-fix recommendations
 - Editor plugin integration
 
-### [1.2.0] - Planned
+### [1.3.0] - Planned
 
 **Testing Enhancements:**
 
@@ -271,6 +356,6 @@ Contributions welcome! Please:
 
 ---
 
-**Current Version:** 1.0.2  
+**Current Version:** 1.1.1  
 **Status:** Production Ready  
-**Last Updated:** 2025-10-22
+**Last Updated:** 2025-10-24
