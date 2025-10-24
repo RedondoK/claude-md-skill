@@ -1,6 +1,6 @@
 # GitHub Flavored Markdown (GFM) Skill
 
-**Version:** 1.1.1
+**Version:** 1.1.2
 **Purpose:** Transform AI markdown generation to be 100% markdownlint-compliant
 **Target:** Zero markdownlint violations in all generated markdown
 
@@ -194,7 +194,9 @@ More text.
 
 ```markdown
 Wrong (95 characters):
+<!-- markdownlint-disable MD013 -->
 This is a very long line that exceeds the recommended 80 character limit and should be broken up.
+<!-- markdownlint-enable MD013 -->
 
 Right (two lines under 80 chars):
 This is a very long line that exceeds the recommended 80 character limit
@@ -381,29 +383,33 @@ od -c filename.md | grep -C2 '240'  # 240 octal = 160 decimal = U+00A0
 ```markdown
 - List item with nested code:
 
-   ```python
-   # Three regular spaces before the fence
-   code_here()
-   ```
+    ```python
+    # Four regular spaces before the fence
+    code_here()
+    ```
 
 - Next item
 ```
 
-Note: The three spaces before the fence are regular spaces (U+0020), not nbsp
+Note: The four spaces before the fence are regular spaces (U+0020), not nbsp
 (U+00A0).
+
+<!-- markdownlint-disable MD032 MD031 MD040 -->
 
 **NEVER:**
 
 ```markdown
 - List item with nested code:
 
-   ```python
-   # If these spaces are nbsp, the block won't nest properly!
+   ```
+   // If these spaces are nbsp, the block won't nest properly!
    code_here()
    ```
 
 - Next item will start a new list instead of continuing
 ```
+
+<!-- markdownlint-enable MD032 MD031 MD040 -->
 
 ## Critical Error Prevention
 
@@ -516,7 +522,9 @@ That's it.
 **Wrong (106 characters):**
 
 ```markdown
+<!-- markdownlint-disable MD013 -->
 This document demonstrates correct code block formatting with proper blank lines and language identifiers.
+<!-- markdownlint-enable MD013 -->
 ```
 
 **Right (79 characters):**
@@ -534,6 +542,8 @@ lines and language identifiers.
 
 ### Error Pattern 7: Invisible Character Issues (Non-Breaking Spaces)
 
+<!-- markdownlint-disable MD032 MD031 MD040 -->
+
 **Wrong (using non-breaking space for indentation):**
 
 Note: The following example uses nbsp (U+00A0) characters which are invisible:
@@ -541,21 +551,23 @@ Note: The following example uses nbsp (U+00A0) characters which are invisible:
 ```markdown
 - List item
 
-   ```python  
+   ```
    code()
    ```
 
 - Next item (will be renumbered as item 1!)
 ```
 
+<!-- markdownlint-enable MD032 MD031 MD040 -->
+
 **Right (using regular spaces):**
 
 ```markdown
 - List item
 
-   ```python
-   code()
-   ```
+    ```python
+    code()
+    ```
 
 - Next item (continues properly)
 ```
@@ -634,7 +646,8 @@ Indent continuation paragraphs:
 
 - Second item with multiple paragraphs
 
-  This is the continuation of the second item. It must be indented to maintain list context.
+  This is the continuation of the second item. It must be indented to maintain
+  list context.
 
   Even more content in the second item.
 
@@ -696,7 +709,9 @@ Think of markdown as **blocks with mandatory spacing:**
 [EOF + newline]
 ```
 
-**Every block transition = blank line required**
+### Block Transition Rule
+
+Every block transition = blank line required
 
 ## Quick Reference Card
 
@@ -890,6 +905,14 @@ guidance.
 
 ## Version History
 
+### v1.1.2 (2025-10-24)
+
+- **FIX:** Corrected line length violations in skill document itself
+- **FIX:** Added markdownlint-disable comments to intentional "Wrong" examples
+- **ENHANCEMENT:** Clarified resource file locations and repository links
+- **CONSISTENCY:** Document now fully practices what it preaches
+- Impact: HIGH - Professional consistency achieved
+
 ### v1.1.1 (2025-10-24)
 
 - **CRITICAL FIX:** Added Core Principle 4 on invisible characters
@@ -938,13 +961,17 @@ guidance.
 
 ## Additional Resources
 
-Reference files in this skill directory:
+The following files are available in this GitHub repository:
 
 - `rules/markdownlint-rules-reference.md` - Complete rule documentation
 - `rules/top-ai-violations.md` - Common mistakes to avoid
 - `examples/correct/` - Correct formatting examples
 - `examples/incorrect/` - What NOT to do
-- `resources/MARKDOWN_VALIDATION_TRAPS.md` - Edge cases and compatibility guide
+- `resources/MARKDOWN_VALIDATION_TRAPS.md` - Edge cases and compatibility
+
+**Repository:** <https://github.com/RedondoK/claude-md-skill>
+
+**Local Path (if cloned):** `C:/Users/kgend/Projects/md_skill_md/`
 
 ## Usage Instructions
 
@@ -973,3 +1000,9 @@ When in doubt:
 8. Use regular spaces only (never nbsp or tabs)
 
 Follow these rules, and your markdown will be perfect.
+
+## Links
+
+- **GitHub Repository:** <https://github.com/RedondoK/claude-md-skill>
+- **Latest Release:** <https://github.com/RedondoK/claude-md-skill/releases>
+- **Issue Tracker:** <https://github.com/RedondoK/claude-md-skill/issues>
