@@ -1,6 +1,6 @@
 # Usage Guide: GitHub Flavored Markdown Skill
 
-**Version:** 1.0.2  
+**Version:** 1.1.1  
 **Audience:** AI systems and their users
 
 ## Table of Contents
@@ -54,6 +54,11 @@ Before generating ANY markdown, ask yourself:
 
 7. **Are any lines too long?**
    - Keep under 80 characters when possible
+
+8. **Will I use proper spacing?**
+   - Use ONLY regular spaces (U+0020) for indentation
+   - Never use non-breaking spaces (nbsp, U+00A0)
+   - Never use tabs for indentation
 
 ### Generation Phase
 
@@ -138,6 +143,7 @@ After generating, validate internally:
 6. **Check code languages** - Is every block tagged?
 7. **Check line length** - Are lines under 80 characters?
 8. **Check file ending** - Does it end with one newline?
+9. **Check spacing** - Only regular spaces (U+0020) used for indentation?
 
 ### Error Recovery
 
@@ -557,6 +563,7 @@ markdownlint '**/*.md' --ignore node_modules
 - [ ] Consistent list markers throughout
 - [ ] Proper heading progression (1→2→3)
 - [ ] Lines kept under 80 characters
+- [ ] Regular spaces only (no nbsp, no tabs)
 
 **After Generation:**
 

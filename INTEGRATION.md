@@ -1,6 +1,6 @@
 # Integration Guide: GitHub Flavored Markdown Skill
 
-**Version:** 1.0.2  
+**Version:** 1.1.1  
 **Purpose:** Integrate this skill into AI systems and workflows
 
 ## Overview
@@ -707,6 +707,9 @@ pipeline {
     "code_blocks": false,
     "tables": false
   },
+  "MD009": {
+    "br_spaces": 2
+  },
   "MD033": {
     "allowed_elements": ["br", "img"]
   },
@@ -722,10 +725,14 @@ pipeline {
 {
   "extends": "markdownlint/style/prettier",
   "MD013": { "line_length": 80 },
+  "MD009": { "br_spaces": 2 },
   "MD024": { "siblings_only": true },
   "MD033": { "allowed_elements": ["details", "summary"] }
 }
 ```
+
+**Note:** `MD009` with `br_spaces: 2` allows two trailing spaces for line breaks,
+which is the standard markdown method for creating `<br>` tags.
 
 ## Testing Integration
 

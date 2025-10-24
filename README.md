@@ -1,8 +1,8 @@
 # GitHub Flavored Markdown Skill for AI Systems
 
-**Version:** 1.0.2  
+**Version:** 1.1.1  
 **Status:** Production Ready  
-**Last Updated:** 2025-10-22
+**Last Updated:** 2025-10-24
 
 ## Overview
 
@@ -27,6 +27,7 @@ issues. This skill eliminates those problems by providing:
 - **Zero Violations Goal:** Generate markdown that passes markdownlint
   immediately
 - **Comprehensive Rule Coverage:** All critical markdownlint rules documented
+- **Invisible Character Detection:** Identifies and prevents nbsp/tab issues
 - **Error Prevention:** Catch common mistakes before they happen
 - **Practical Examples:** Correct vs incorrect patterns for every rule
 - **VSCode Compatible:** Works seamlessly with popular validation tools
@@ -125,6 +126,13 @@ Not optional, not stylistic - **mandatory**:
 - Files end with exactly one newline
 - Proper nesting and indentation
 
+### 4. Invisible Characters Matter
+
+- Use ONLY regular spaces (U+0020) for indentation
+- Never use non-breaking spaces (U+00A0, `&nbsp;`)
+- Never use tabs for indentation
+- Watch for zero-width characters that break parsing
+
 ## Common Use Cases
 
 ### Technical Documentation
@@ -178,6 +186,23 @@ markdownlint filename.md
 - ✅ Immediate usability in production
 
 ## Version History
+
+### v1.1.1 (2025-10-24)
+
+- **CRITICAL FIX:** Added invisible character detection and prevention
+- Added Core Principle 4 on invisible characters
+- Added Rule 8: Character Encoding and Spacing
+- Added Error Pattern 7 for non-breaking space issues
+- Enhanced documentation for AI-generated markdown pitfalls
+- Impact: HIGH - Prevents hard-to-debug nbsp parsing issues
+
+### v1.1.0 (2025-10-24)
+
+- Added edge cases and cross-platform compatibility section
+- Added two-space line break standard and guidance
+- Enhanced Rule 5 with line break instructions
+- Created comprehensive edge case documentation
+- Phase 5 QA complete
 
 ### v1.0.2 (2025-10-22)
 

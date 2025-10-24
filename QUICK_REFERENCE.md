@@ -1,6 +1,6 @@
 # Quick Reference: GitHub Flavored Markdown
 
-**Version:** 1.0.2 | Print this page for desk reference
+**Version:** 1.1.1 | Print this page for desk reference
 
 ## The Golden Rules
 
@@ -10,6 +10,7 @@
 3. Specify language for every code block
 4. Increment heading levels by one
 5. Keep lines under 80 characters
+6. Use ONLY regular spaces for indentation (no nbsp, no tabs)
 ```
 
 ## Every List
@@ -74,6 +75,7 @@ Before generating markdown:
 - [ ] What list style? (use `-`)
 - [ ] What languages? (specify all)
 - [ ] Any long lines? (keep under 80 chars)
+- [ ] Using proper spacing? (regular spaces only, no nbsp/tabs)
 
 ## Post-Generation Checklist
 
@@ -87,6 +89,7 @@ After generating markdown:
 - [ ] All code blocks have languages
 - [ ] Lines are under 80 characters
 - [ ] File ends with one newline
+- [ ] Only regular spaces used (no nbsp, no tabs)
 
 ## Common Violations Quick Fix
 
