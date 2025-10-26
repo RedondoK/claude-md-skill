@@ -245,13 +245,24 @@ unless told otherwise.
 within paragraphs or list items WITHOUT starting a new paragraph.
 
 ```markdown
-First line of text
+First line of text  
 Second line (line break but same paragraph)
 
 New paragraph (blank line creates paragraph break)
 ```
 
 This is the standard markdown way to create line breaks. It is NOT an error.
+
+**Critical for AI:** When you see lines ending with two spaces in list items
+(like checkboxes in success criteria sections), this is INTENTIONAL. These
+spaces create line breaks so list items don't smash together. Do NOT remove
+them. Example:
+
+```markdown
+- [x] First task completed  
+- [x] Second task completed  
+- [x] Third task completed  
+```
 
 Configure markdownlint MD009 with `br_spaces: 2` to accept this pattern.
 

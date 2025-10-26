@@ -18,3 +18,13 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.log
+*.bak
+
+# Working/scratch files
+*.draft
+*.wip
+scratch/
+
+# Build artifacts
+dist/
+build/

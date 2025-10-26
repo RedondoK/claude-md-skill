@@ -1,6 +1,6 @@
 # Integration Guide: GitHub Flavored Markdown Skill
 
-**Version:** 1.1.1  
+**Version:** 1.1.2
 **Purpose:** Integrate this skill into AI systems and workflows
 
 ## Overview
@@ -22,16 +22,16 @@ extension)
 def generate_markdown(request):
     # Load skill
     skill = read_file("C:/path/to/SKILL.md")
-    
+
     # Inject into context
     context = f"{skill}\n\nUser request: {request}"
-    
+
     # Generate
     markdown = ai_model.generate(context)
-    
+
     # Validate
     result = validate_with_markdownlint(markdown)
-    
+
     return markdown if result.is_clean else correct_violations(markdown)
 ```
 
@@ -127,13 +127,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Install markdownlint
         run: npm install -g markdownlint-cli
-      
+
       - name: Validate markdown files
         run: markdownlint '**/*.md' --ignore node_modules
-      
+
       - name: Report violations
         if: failure()
         run: |
@@ -266,23 +266,23 @@ app = Flask(__name__)
 @app.route('/validate', methods=['POST'])
 def validate_markdown():
     markdown_content = request.json.get('content')
-    
+
     # Write to temp file
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.md', 
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.md',
                                      delete=False) as f:
         f.write(markdown_content)
         temp_path = f.name
-    
+
     # Validate
     result = subprocess.run(
         ['markdownlint', temp_path],
         capture_output=True,
         text=True
     )
-    
+
     # Clean up
     os.unlink(temp_path)
-    
+
     return jsonify({
         'valid': result.returncode == 0,
         'errors': result.stdout if result.returncode != 0 else None
@@ -322,11 +322,11 @@ def validate_markdown_file(filepath):
 
 def validate_markdown_content(content):
     """Validate markdown content string."""
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.md', 
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.md',
                                      delete=False) as f:
         f.write(content)
         temp_path = f.name
-    
+
     result = validate_markdown_file(temp_path)
     Path(temp_path).unlink()
     return result
@@ -350,7 +350,7 @@ function validateMarkdown(filepath) {
   };
 
   const result = markdownlint.sync(options);
-  
+
   return {
     valid: Object.keys(result[filepath]).length === 0,
     violations: result[filepath]
@@ -557,11 +557,11 @@ import anthropic
 
 def generate_markdown_with_skill(user_request):
     client = anthropic.Anthropic()
-    
+
     # Load skill
     with open('C:/path/to/SKILL.md', 'r') as f:
         skill_content = f.read()
-    
+
     message = client.messages.create(
         model="claude-sonnet-4-5-20250929",
         max_tokens=4096,
@@ -570,7 +570,7 @@ def generate_markdown_with_skill(user_request):
             {"role": "user", "content": user_request}
         ]
     )
-    
+
     return message.content[0].text
 ```
 
@@ -622,22 +622,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      
+
       - name: Install markdownlint-cli
         run: npm install -g markdownlint-cli
-      
+
       - name: Lint markdown files
         run: markdownlint '**/*.md' --ignore node_modules
-      
+
       - name: Auto-fix violations (if any)
         if: failure()
         run: markdownlint --fix '**/*.md' --ignore node_modules
-      
+
       - name: Commit fixes
         if: failure()
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -674,7 +674,7 @@ markdown_lint:
 ```groovy
 pipeline {
     agent any
-    
+
     stages {
         stage('Validate Markdown') {
             steps {
@@ -683,7 +683,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         failure {
             echo 'Markdown validation failed'
@@ -747,14 +747,14 @@ from markdown_generator import generate_markdown
 class TestMarkdownGeneration(unittest.TestCase):
     def test_lists_have_blank_lines(self):
         result = generate_markdown("Create a list of items")
-        
+
         # Check for blank lines around list
         self.assertIn("\n\n-", result)
         self.assertIn("\n\n", result.split("-")[-1])
-    
+
     def test_code_blocks_have_languages(self):
         result = generate_markdown("Show Python code example")
-        
+
         self.assertIn("```python", result)
 ```
 
@@ -769,11 +769,11 @@ const markdownlint = require('markdownlint');
 describe('Markdown Generation', () => {
   test('generates valid markdown', () => {
     const content = generateMarkdown('Create a README');
-    
+
     const result = markdownlint.sync({
       strings: { content: content }
     });
-    
+
     expect(Object.keys(result.content)).toHaveLength(0);
   });
 });
@@ -796,16 +796,16 @@ def track_violations():
         capture_output=True,
         text=True
     )
-    
+
     violations = json.loads(result.stdout) if result.returncode != 0 else {}
-    
+
     metric = {
         'timestamp': datetime.now().isoformat(),
         'total_files': len(violations),
         'total_violations': sum(len(v) for v in violations.values()),
         'files': violations
     }
-    
+
     # Log to monitoring system
     with open('markdown_metrics.jsonl', 'a') as f:
         f.write(json.dumps(metric) + '\n')

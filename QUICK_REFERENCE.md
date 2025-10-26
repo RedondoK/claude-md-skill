@@ -1,6 +1,6 @@
 # Quick Reference: GitHub Flavored Markdown
 
-**Version:** 1.1.1 | Print this page for desk reference
+**Version:** 1.1.2 | Print this page for desk reference
 
 ## The Golden Rules
 
@@ -616,7 +616,7 @@ Most violations are **missing blank lines**. When in doubt, add them.
 
 ---
 
-**Goal:** Zero violations on first generation  
-**Method:** Follow these patterns  
-**Validation:** `markdownlint filename.md`  
+**Goal:** Zero violations on first generation
+**Method:** Follow these patterns
+**Validation:** `markdownlint filename.md`
 **Result:** Perfect markdown

@@ -1,7 +1,7 @@
 # GitHub Flavored Markdown Skill for AI Systems
 
-**Version:** 1.1.1  
-**Status:** Production Ready  
+**Version:** 1.1.2
+**Status:** Production Ready
 **Last Updated:** 2025-10-24
 
 ## Overview
@@ -75,31 +75,81 @@ Let's continue with...
 
 **Result:** Zero violations
 
-## Directory Structure
+## Repository Structure
 
 ```text
 md_skill_md/
-├── SKILL.md                          # Main skill document
-├── README.md                         # This file
+├── SKILL.md                          # Main skill document (load this!)
+├── README.md                         # Project overview (this file)
 ├── USAGE.md                          # Detailed usage guide
-├── QUICK_REFERENCE.md                # One-page cheat sheet
-├── INTEGRATION.md                    # Integration notes
-├── CHANGELOG.md                      # Version history
-├── rules/
+├── QUICK_REFERENCE.md                # One-page quick reference card
+├── INTEGRATION.md                    # Integration guide for workflows
+├── ROADMAP.md                        # Project roadmap and future plans
+├── CHANGELOG.md                      # Version history and updates
+├── LICENSE                           # License information
+├── PROJECT-STRUCTURE.md              # Detailed structure documentation
+├── .gitignore                        # Git ignore patterns
+├── .gitattributes                    # Git line ending normalization
+├── .markdownlintrc                   # Markdownlint configuration
+├── examples/                         # Example markdown files
+│   ├── correct/                      # Correctly formatted examples
+│   │   ├── code-blocks-correct.md
+│   │   ├── headings-correct.md
+│   │   └── lists-correct.md
+│   └── incorrect/                    # Incorrectly formatted examples
+│       └── lists-incorrect.md
+├── tests/                            # Comprehensive test suite
+│   ├── README.md                     # Test documentation
+│   ├── QUICK-REFERENCE.md            # Test quick reference
+│   ├── run-tests.sh                  # Unix test runner
+│   ├── run-tests.bat                 # Windows test runner
+│   ├── flawed/                       # Intentionally flawed test files
+│   ├── perfect/                      # Perfect reference files
+│   └── validation/                   # Validation test plans
+│       ├── TEST-PLAN.md
+│       └── results/                  # Test results directory
+├── rules/                            # Rule reference documentation
 │   ├── markdownlint-rules-reference.md
 │   └── top-ai-violations.md
-├── examples/
-│   ├── correct/
-│   │   ├── basic-document.md
-│   │   ├── complex-nesting.md
-│   │   └── technical-doc.md
-│   └── incorrect/
-│       ├── common-violations.md
-│       └── before-after.md
-└── tests/
-    ├── test-suite.md
-    └── validation-results.txt
+├── markdown/                         # Standalone markdown skill
+│   ├── SKILL.md                      # Markdown-specific skill variant
+│   ├── README.md
+│   ├── LICENSE
+│   └── references/                   # Markdown references
+├── resources/                        # Additional resources
+│   └── MARKDOWN_VALIDATION_TRAPS.md  # Edge cases and gotchas
+├── archive/                          # Archived versions
+│   └── v1.1.1_nbsp_development/      # Historical development files
+└── roadwork/                         # Development/working files
+    ├── phase6/                       # Phase 6 working directory
+    ├── PHASE_*.md                    # Phase documentation
+    ├── *_ANALYSIS.md                 # AI feedback analysis
+    ├── *_FIX_*.md                    # Fix guides and summaries
+    └── *.sh                          # Working scripts
 ```
+
+### Directory Descriptions
+
+**Root Files (Deliverables):**
+
+- Core skill and documentation files that users interact with directly
+- All essential guides and references
+- Configuration files for tools and git
+
+**examples/:** Correct and incorrect markdown examples for learning
+
+**tests/:** Comprehensive test suite with automated runners and validation
+
+**rules/:** Detailed rule documentation and violation references
+
+**markdown/:** Standalone variant of the skill focused on markdown-only use
+
+**resources/:** Additional reference materials and edge case documentation
+
+**archive/:** Historical versions and development snapshots
+
+**roadwork/:** Development artifacts, working files, and process documentation
+(not part of deliverables)
 
 ## Core Principles
 
@@ -186,6 +236,13 @@ markdownlint filename.md
 - ✅ Immediate usability in production
 
 ## Version History
+
+### v1.1.2 (2025-10-24)
+
+- Fixed line length violations in SKILL.md
+- Added GitHub repository links
+- Enhanced resource accessibility
+- Zero violations in skill document itself
 
 ### v1.1.1 (2025-10-24)
 

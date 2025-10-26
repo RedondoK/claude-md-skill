@@ -1,15 +1,15 @@
 # Development Roadmap
 
-**Project:** GFM Skill for AI  
-**Version:** 1.1.1  
+**Project:** GFM Skill for AI
+**Version:** 1.1.2
 **Last Updated:** 2025-10-24
 
 ## Project Timeline
 
 ### Phase 0: Research & Requirements Gathering ✅
 
-**Status:** Complete  
-**Duration:** Initial phase  
+**Status:** Complete
+**Duration:** Initial phase
 **Deliverables:**
 
 - Fetched markdownlint complete rule set (53+ rules)
@@ -33,8 +33,8 @@
 
 ### Phase 1: Core Skill Development ✅
 
-**Status:** Complete  
-**Duration:** Single iteration  
+**Status:** Complete
+**Duration:** Single iteration
 **Deliverables:**
 
 - Rule catalog with markdownlint rule numbers (MD###)
@@ -60,8 +60,8 @@
 
 ### Phase 2: Test Suite Creation ✅
 
-**Status:** Complete  
-**Completion Date:** 2025-10-22  
+**Status:** Complete
+**Completion Date:** 2025-10-22
 **Deliverables:**
 
 - Created intentionally flawed test documents
@@ -98,9 +98,9 @@
 
 ### Phase 3: Skill Testing & Iteration ✅
 
-**Status:** COMPLETE  
-**Completion Date:** 2025-10-22  
-**Success Rate:** 100% (11/11 tests passed)  
+**Status:** COMPLETE
+**Completion Date:** 2025-10-22
+**Success Rate:** 100% (11/11 tests passed)
 **Planned Activities:**
 
 1. Run automated test suite against existing test documents
@@ -157,7 +157,7 @@
 
 ### Phase 4: Documentation 📝
 
-**Status:** Running Parallel  
+**Status:** Running Parallel
 **Ongoing Throughout Project**
 
 **Deliverables:**
@@ -182,8 +182,8 @@
 
 ### Phase 5: Quality Assurance ✅
 
-**Status:** COMPLETE  
-**Completion Date:** 2025-10-24  
+**Status:** COMPLETE
+**Completion Date:** 2025-10-24
 **Prerequisites:** Phase 3 complete ✅
 
 **Completed Activities:**
@@ -214,8 +214,8 @@
 
 ### Phase 6: Packaging & Deployment 📦
 
-**Status:** IN PROGRESS  
-**Start Date:** 2025-10-24  
+**Status:** IN PROGRESS
+**Start Date:** 2025-10-24
 **Prerequisites:** Phase 5 complete ✅
 
 **Planned Deliverables:**

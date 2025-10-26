@@ -5,7 +5,7 @@ md_skill_md/
 ├── .git/                                  # Git repository
 ├── .gitignore                             # Git ignore rules
 ├── README.md                              # Main project documentation
-├── SKILL.md                               # Core skill document (v1.1.1)
+├── SKILL.md                               # Core skill document (v1.1.2)
 │
 ├── Phase Documentation
 │   ├── PHASE_0_COMPLETE.md               # Phase 0 summary
@@ -131,7 +131,7 @@ md_skill_md/
 
 ## Version Information
 
-- **Project Version:** 1.1.1
-- **Skill Version:** 1.1.1
+- **Project Version:** 1.1.2
+- **Skill Version:** 1.1.2
 - **Last Updated:** 2025-10-24
 - **Current Phase:** 6 In Progress (Packaging & Deployment)

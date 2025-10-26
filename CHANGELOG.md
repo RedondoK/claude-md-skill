@@ -5,6 +5,47 @@ All notable changes to this skill will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Reorganized repository structure for clarity
+- Moved development/working files to `roadwork/` directory
+- Moved phase documents (PHASE_*.md) to roadwork/
+- Moved AI feedback analysis files to roadwork/
+- Moved fix and status documents to roadwork/
+- Moved working scripts to roadwork/
+- Improved repository navigation and cleanliness
+
+### Repository Structure
+
+- Created `roadwork/` directory for development artifacts
+- Separated deliverable documents from working documents
+- Maintained clean root directory with only essential files
+
+## [1.1.2] - 2025-10-24
+
+### Fixed
+
+- Line length violations in SKILL.md prose sections
+- Missing markdownlint-disable comments around "Wrong" examples
+- SKILL.md now passes markdownlint with 0 violations
+
+### Documentation
+
+- Added GitHub repository links to resource sections
+- Clarified where referenced files are located
+- Enhanced resource accessibility
+
+### Why This Matters
+
+This update fixes "do as I say, not as I do" inconsistencies where the skill
+document itself violated some of the rules it teaches. Now the skill document
+is a perfect example of markdownlint-compliant markdown.
+
+**Impact:** HIGH - Professional consistency
+**Priority:** CRITICAL - Document integrity
+
 ## [1.1.1] - 2025-10-24
 
 ### Added - CRITICAL FIXES
@@ -55,9 +96,9 @@ break markdown parsing, causing:
 This exact issue was discovered in SKILL.md itself during validation, making
 it a real-world problem that needed immediate documentation and prevention.
 
-**Impact:** HIGH - Prevents hard-to-debug issues in AI-generated content  
-**Priority:** CRITICAL - Essential for reliable markdown generation  
-**Detection:** Added command-line and visual detection methods  
+**Impact:** HIGH - Prevents hard-to-debug issues in AI-generated content
+**Priority:** CRITICAL - Essential for reliable markdown generation
+**Detection:** Added command-line and visual detection methods
 **Prevention:** Enhanced skill guidance to explicitly avoid nbsp
 
 ## [1.1.0] - 2025-10-24
@@ -356,6 +397,6 @@ Contributions welcome! Please:
 
 ---
 
-**Current Version:** 1.1.1  
-**Status:** Production Ready  
-**Last Updated:** 2025-10-24
+**Current Version:** 1.1.2
+**Status:** Production Ready
+**Last Updated:** 2025-10-26
