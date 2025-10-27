@@ -32,7 +32,8 @@
 
 ### headings
 
-- MD001, MD003, MD018, MD019, MD020, MD021, MD022, MD023, MD024, MD025, MD026, MD036, MD041, MD043
+- MD001, MD003, MD018, MD019, MD020, MD021, MD022, MD023, MD024, MD025, MD026,
+  MD036, MD041, MD043
 
 ### hr
 
@@ -76,7 +77,8 @@
 
 ### Rule Description
 
-Lists (ordered and unordered) MUST have blank lines before and after them, except when:
+Lists (ordered and unordered) MUST have blank lines before and after them,
+except when:
 
 - At the beginning of a document
 - At the end of a document
@@ -120,7 +122,8 @@ Another paragraph.
 
 ### Rationale
 
-Without blank lines, many markdown parsers (including CommonMark) will not recognize the list and will render it as plain text or incorrectly.
+Without blank lines, many markdown parsers (including CommonMark) will not
+recognize the list and will render it as plain text or incorrectly.
 
 ## 2. MD004 - Unordered list style
 
@@ -130,7 +133,8 @@ Without blank lines, many markdown parsers (including CommonMark) will not recog
 
 ### Rule Description
 
-Unordered list markers should be consistent throughout the document. Valid markers are:
+Unordered list markers should be consistent throughout the document. Valid
+markers are:
 
 - `-` (dash) - RECOMMENDED
 - `*` (asterisk)
@@ -154,7 +158,8 @@ Unordered list markers should be consistent throughout the document. Valid marke
 
 ### Rationale
 
-Consistent markers improve readability and make the document structure clearer.
+Consistent markers improve readability and make the document structure
+clearer.
 
 ## 3. MD047 - Files should end with a single newline character
 
@@ -191,7 +196,8 @@ Content here
 
 ### Rationale
 
-This is a POSIX standard that many tools expect. Git and other version control systems work better with files ending in newlines.
+This is a POSIX standard that many tools expect. Git and other version
+control systems work better with files ending in newlines.
 
 ## 4. MD001 - Heading levels should only increment by one level at a time
 
@@ -227,7 +233,8 @@ When increasing heading levels, increment by only one level. Don't skip levels.
 
 ### Rationale
 
-Screen readers and document navigation tools rely on proper heading hierarchy. Skipping levels creates confusion and breaks accessibility.
+Screen readers and document navigation tools rely on proper heading
+hierarchy. Skipping levels creates confusion and breaks accessibility.
 
 ## 5. MD003 - Heading style
 
@@ -312,15 +319,20 @@ Blank lines around headings improve readability and ensure proper parsing.
 
 ### Rule Description
 
-Fenced code blocks (using ``` or ~~~) should have blank lines before and after them.
+Fenced code blocks (using ``` or ~~~) should have blank lines before and
+after them.
 
 ### Incorrect Example
 
 ```markdown
 Some text
+```
+
 ```javascript
 const x = 1;
 ```
+
+```markdown
 More text
 ```
 
@@ -329,16 +341,21 @@ More text
 ```markdown
 Some text
 
+```
+
 ```javascript
 const x = 1;
 ```
+
+```markdown
 
 More text
 ```
 
 ### Rationale
 
-Without blank lines, some parsers may not recognize the code block boundaries correctly.
+Without blank lines, some parsers may not recognize the code block
+boundaries correctly.
 
 ## 8. MD040 - Fenced code blocks should have a language specified
 
@@ -353,22 +370,31 @@ Always specify a language identifier for fenced code blocks.
 ### Incorrect Example
 
 ````markdown
+
 ```
+
 const x = 1;
+
 ```
+
 ````
 
 ### Correct Example
 
 ````markdown
+
 ```javascript
+
 const x = 1;
+
 ```
+
 ````
 
 ### Rationale
 
-Language identifiers enable syntax highlighting in most renderers and improve readability.
+Language identifiers enable syntax highlighting in most renderers and
+improve readability.
 
 ## 9. MD009 - Trailing spaces
 
@@ -378,11 +404,13 @@ Language identifiers enable syntax highlighting in most renderers and improve re
 
 ### Rule Description
 
-Lines should not have trailing spaces, except when creating hard line breaks (2+ spaces).
+Lines should not have trailing spaces, except when creating hard line breaks
+(2+ spaces).
 
 ### Rationale
 
-Trailing spaces create noise in version control diffs and can cause unexpected rendering.
+Trailing spaces create noise in version control diffs and can cause
+unexpected rendering.
 
 ## 10. MD010 - Hard tabs
 
@@ -396,13 +424,15 @@ Use spaces instead of tabs for indentation.
 
 ### Rationale
 
-Tabs render differently in different environments. Spaces ensure consistent rendering.
+Tabs render differently in different environments. Spaces ensure consistent
+rendering.
 
 ## Additional Important Rules
 
 ### MD013 - Line length
 
-Lines should not exceed a specified length (default 80 characters). This is often disabled or set to a higher value (e.g., 120) for modern documents.
+Lines should not exceed a specified length (default 80 characters). This is
+often disabled or set to a higher value (e.g., 120) for modern documents.
 
 ### MD018/MD019 - No space after hash on atx style heading
 
@@ -451,17 +481,17 @@ Avoid using raw HTML in markdown. Use markdown syntax instead.
 
 ### SHOULD FIX (High Priority)
 
-5. MD004 - Consistent list style
-6. MD047 - File ends with newline
-7. MD003 - Heading style consistency
-8. MD040 - Code block language
+1. MD004 - Consistent list style
+2. MD047 - File ends with newline
+3. MD003 - Heading style consistency
+4. MD040 - Code block language
 
 ### NICE TO FIX (Medium Priority)
 
-9. MD009 - Trailing spaces
-10. MD010 - Hard tabs
-11. MD018 - Space after hash
-12. MD023 - Headings at start of line
+1. MD009 - Trailing spaces
+2. MD010 - Hard tabs
+3. MD018 - Space after hash
+4. MD023 - Headings at start of line
 
 ## Testing Strategy
 

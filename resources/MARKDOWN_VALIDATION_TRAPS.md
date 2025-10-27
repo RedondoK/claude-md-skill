@@ -78,7 +78,8 @@ breaking list continuity.
    ```
 
 - Next item (will be renumbered as item 1!)
-```
+
+```markdown
 
 In the above example, if those three spaces before the code fence are nbsp
 characters instead of regular spaces, the code block won't nest properly and
@@ -170,7 +171,8 @@ indentation, matching the list item's content indentation level:
    ```
 
 - Third item (continues list properly)
-```
+
+```markdown
 
 Three spaces (for `-` marker lists) or four spaces (for numbered lists)
 before the fence tell the parser this code block is part of the list item.

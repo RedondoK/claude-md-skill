@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed all markdownlint violations in production support files (51 total)
+- Fixed resources/MARKDOWN_VALIDATION_TRAPS.md (6 violations)
+  - Added blank lines around code blocks
+  - Added language identifiers to code blocks
+- Fixed rules/markdownlint-rules-reference.md (22 violations)
+  - Fixed line length violations in multiple sections
+  - Added blank lines around code blocks
+  - Fixed code block examples in MD031/MD040 sections
+  - Fixed ordered list numbering in priority sections
+  - Added language identifiers to all code blocks
+- Fixed rules/top-ai-violations.md (18 violations)
+  - Fixed line length violations throughout document
+  - Fixed ordered list numbering in summary sections
+  - Added language identifier to mental model code block
+- Fixed tests/README.md (5 violations)
+  - Fixed line length violations in overview and examples
+  - Wrapped long descriptions properly
+
 ### Changed
 
 - Reorganized repository structure for clarity
@@ -16,6 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved fix and status documents to roadwork/
 - Moved working scripts to roadwork/
 - Improved repository navigation and cleanliness
+
+### Added
+
+- Created validate-production.sh script for pre-release validation
 
 ### Repository Structure
 

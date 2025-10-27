@@ -5,7 +5,9 @@
 
 ## Overview
 
-This test suite validates that the GFM skill correctly prevents markdownlint violations. It includes intentionally flawed documents, perfect reference documents, and automated validation tools.
+This test suite validates that the GFM skill correctly prevents markdownlint
+violations. It includes intentionally flawed documents, perfect reference
+documents, and automated validation tools.
 
 ## Directory Structure
 
@@ -77,7 +79,7 @@ markdownlint version: 0.x.x
 Testing Flawed Documents (should have violations)...
 ------------------------------------------------------
 [PASS] md001-heading-increment.md - has violations as expected
-[PASS] md004-inconsistent-list-markers.md - has violations as expected
+[PASS] md004-inconsistent-list-markers.md - violations as expected
 [PASS] md022-headings-without-blanks.md - has violations as expected
 [PASS] md031-md040-code-blocks.md - has violations as expected
 [PASS] md032-lists-without-blanks.md - has violations as expected
@@ -114,7 +116,8 @@ These files intentionally violate markdownlint rules to verify that:
 **Test Files:**
 
 - `md001-heading-increment.md` - Tests heading level progression (MD001)
-- `md004-inconsistent-list-markers.md` - Tests list marker consistency (MD004)
+- `md004-inconsistent-list-markers.md` - Tests list marker consistency
+  (MD004)
 - `md022-headings-without-blanks.md` - Tests blank lines around headings (MD022)
 - `md031-md040-code-blocks.md` - Tests code block formatting (MD031, MD040)
 - `md032-lists-without-blanks.md` - Tests blank lines around lists (MD032)
@@ -280,7 +283,8 @@ Update tests when:
 
 ### Next Phase
 
-After Phase 2 completion, proceed to Phase 3: Skill Testing & Iteration, which uses these tests to validate the skill's effectiveness.
+After Phase 2 completion, proceed to Phase 3: Skill Testing & Iteration,
+which uses these tests to validate the skill's effectiveness.
 
 ## Test Coverage
 

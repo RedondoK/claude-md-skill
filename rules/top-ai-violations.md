@@ -1,11 +1,13 @@
 # Top 10 AI-Generated Markdown Violations
 
 **Analysis Date:** 2025-10-22  
-**Purpose:** Identify and document the most common markdownlint violations in AI-generated markdown
+**Purpose:** Identify and document the most common markdownlint violations in
+AI-generated markdown
 
 ## Violation Frequency Analysis
 
-Based on user feedback and known patterns in AI-generated markdown, these are the most common violations:
+Based on user feedback and known patterns in AI-generated markdown, these are
+the most common violations:
 
 ## 1. MD032 - Missing blank lines around lists
 
@@ -14,7 +16,9 @@ Based on user feedback and known patterns in AI-generated markdown, these are th
 
 ### Why AI Makes This Mistake
 
-AI models often generate flowing text and forget that lists need visual and syntactic separation. When transitioning from prose to lists or from lists back to prose, the blank line is frequently omitted.
+AI models often generate flowing text and forget that lists need visual and
+syntactic separation. When transitioning from prose to lists or from lists
+back to prose, the blank line is frequently omitted.
 
 ### Common Pattern
 
@@ -43,7 +47,8 @@ Let's continue with...
 
 ### Why AI Makes This Mistake
 
-When generating structured content with multiple sections, AI often places headings immediately after text or before lists without proper spacing.
+When generating structured content with multiple sections, AI often places
+headings immediately after text or before lists without proper spacing.
 
 ### Common Pattern
 
@@ -70,7 +75,8 @@ The content continues...
 
 ### Why AI Makes This Mistake
 
-Code blocks are treated as inline elements in the generation flow, causing the model to skip blank lines before/after.
+Code blocks are treated as inline elements in the generation flow, causing
+the model to skip blank lines before/after.
 
 ### Common Pattern
 
@@ -103,7 +109,8 @@ This function prints...
 
 ### Why AI Makes This Mistake
 
-When generating deeply nested content or emphasizing certain sections, AI may jump from `#` to `###` without intermediate levels.
+When generating deeply nested content or emphasizing certain sections, AI
+may jump from `#` to `###` without intermediate levels.
 
 ### Common Pattern
 
@@ -130,7 +137,8 @@ Should be:
 
 ### Why AI Makes This Mistake
 
-Different training data uses different list markers (`-`, `*`, `+`), and AI may switch between them within a single document.
+Different training data uses different list markers (`-`, `*`, `+`), and AI
+may switch between them within a single document.
 
 ### Common Pattern
 
@@ -157,7 +165,8 @@ Should be:
 
 ### Why AI Makes This Mistake
 
-AI generation typically ends at the last character of content without considering POSIX standards for file endings.
+AI generation typically ends at the last character of content without
+considering POSIX standards for file endings.
 
 ## 7. MD040 - Missing language identifier in code blocks
 
@@ -166,7 +175,8 @@ AI generation typically ends at the last character of content without considerin
 
 ### Why AI Makes This Mistake
 
-When generating generic examples or when uncertain about the language, AI may omit the identifier.
+When generating generic examples or when uncertain about the language, AI
+may omit the identifier.
 
 ### Common Pattern
 
@@ -200,7 +210,8 @@ Tokenization and generation process may introduce spaces at line endings.
 
 ### Why AI Makes This Mistake
 
-Training data contains both ATX (`#`) and Setext (underlined) styles, causing occasional mixing.
+Training data contains both ATX (`#`) and Setext (underlined) styles,
+causing occasional mixing.
 
 ## 10. MD023 - Indented headings
 
@@ -221,33 +232,36 @@ When generating nested or quoted content, AI may accidentally indent headings.
 
 ### High Priority Issues
 
-4. **MD001** - Heading level progression (30%)
-5. **MD004** - List marker consistency (25%)
-6. **MD047** - File ending (25%)
+1. **MD001** - Heading level progression (30%)
+2. **MD004** - List marker consistency (25%)
+3. **MD047** - File ending (25%)
 
 ### Medium Priority Issues
 
-7. **MD040** - Code block language (20%)
-8. **MD009** - Trailing spaces (10%)
-9. **MD003** - Heading style (10%)
-10. **MD023** - Heading indentation (5%)
+1. **MD040** - Code block language (20%)
+2. **MD009** - Trailing spaces (10%)
+3. **MD003** - Heading style (10%)
+4. **MD023** - Heading indentation (5%)
 
 ## Root Cause Analysis
 
 ### Pattern 1: Blank Line Blindness
 
 **Violations:** MD032, MD022, MD031  
-**Root Cause:** AI treats markdown as continuous prose and doesn't recognize block-level elements need visual separation
+**Root Cause:** AI treats markdown as continuous prose and doesn't recognize
+block-level elements need visual separation
 
 ### Pattern 2: Structural Inconsistency
 
 **Violations:** MD001, MD004, MD003  
-**Root Cause:** Training data contains multiple valid styles, causing inconsistent application
+**Root Cause:** Training data contains multiple valid styles, causing
+inconsistent application
 
 ### Pattern 3: Technical Details
 
 **Violations:** MD047, MD040, MD009  
-**Root Cause:** Generation process doesn't account for file-level requirements or syntax hints
+**Root Cause:** Generation process doesn't account for file-level
+requirements or syntax hints
 
 ## Mitigation Strategies
 
@@ -275,7 +289,7 @@ After generating markdown:
 
 Think of markdown blocks as physical objects that need space:
 
-```
+```text
 [Text Block]
 [SPACE]
 [List Block]
