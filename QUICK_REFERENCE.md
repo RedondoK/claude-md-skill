@@ -95,6 +95,8 @@ After generating markdown:
 
 ### MD032: List Missing Blank Lines
 
+<!-- markdownlint-disable MD032 -->
+
 **Wrong:**
 
 ```markdown
@@ -102,6 +104,8 @@ text
 - item
 text
 ```
+
+<!-- markdownlint-enable MD032 -->
 
 **Right:**
 
@@ -115,6 +119,8 @@ text
 
 ### MD022: Heading Missing Blank Lines
 
+<!-- markdownlint-disable MD022 -->
+
 **Wrong:**
 
 ```markdown
@@ -122,6 +128,8 @@ text
 ## Heading
 text
 ```
+
+<!-- markdownlint-enable MD022 -->
 
 **Right:**
 
@@ -135,6 +143,8 @@ text
 
 ### MD031: Code Missing Blank Lines
 
+<!-- markdownlint-disable MD031 MD040 -->
+
 **Wrong:**
 
 ````markdown
@@ -144,6 +154,8 @@ code
 ```
 text
 ````
+
+<!-- markdownlint-enable MD031 MD040 -->
 
 **Right:**
 
@@ -159,12 +171,16 @@ text
 
 ### MD001: Heading Level Skip
 
+<!-- markdownlint-disable MD001 -->
+
 **Wrong:**
 
 ```markdown
 # Title
 ### Sub (skipped H2)
 ```
+
+<!-- markdownlint-enable MD001 -->
 
 **Right:**
 
@@ -178,6 +194,8 @@ text
 
 ### MD040: Code Missing Language
 
+<!-- markdownlint-disable MD040 -->
+
 **Wrong:**
 
 ````markdown
@@ -185,6 +203,8 @@ text
 code
 ```
 ````
+
+<!-- markdownlint-enable MD040 -->
 
 **Right:**
 
@@ -196,11 +216,15 @@ code
 
 ### MD013: Line Too Long
 
+<!-- markdownlint-disable MD013 -->
+
 **Wrong:**
 
 ```markdown
 This line exceeds the recommended 80 character limit and should be split.
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 **Right:**
 
@@ -211,6 +235,8 @@ split.
 
 ### MD004: Inconsistent List Markers
 
+<!-- markdownlint-disable MD004 -->
+
 **Wrong:**
 
 ```markdown
@@ -218,6 +244,8 @@ split.
 * Item
 + Item
 ```
+
+<!-- markdownlint-enable MD004 -->
 
 **Right:**
 
@@ -267,7 +295,7 @@ Following text.
 Previous text.
 
 1. Step one
-2. Step two
+2. Step one
 3. Step three
 
 Following text.
@@ -308,10 +336,10 @@ kotlin      r           text         diff
 
 2. Second step with code:
 
-   ```python
-   def example():
-       return True
-   ```
+    ```python
+    def example():
+        return True
+    ```
 
 3. Third step
 ```
@@ -407,14 +435,19 @@ text
 
 **Break long lines:**
 
+<!-- markdownlint-disable MD013 -->
+
 ```markdown
 Wrong (90 chars):
-This is a very long line that exceeds the limit and needs to be broken into parts.
+This is a very long line that exceeds the limit and needs to be broken
+into parts.
 
 Right:
 This is a very long line that exceeds the limit and needs to be broken
 into parts.
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 **Long URLs:**
 
@@ -481,9 +514,11 @@ Every transition between block elements requires a blank line.
 
 ## Quick Patterns
 
+<!-- markdownlint-disable MD031 -->
+
 ### README Template
 
-```markdown
+````markdown
 # Project Name
 
 Short description.
@@ -514,11 +549,12 @@ Contribution guidelines.
 ## License
 
 License information.
-```
+
+````
 
 ### Technical Doc Template
 
-```markdown
+````markdown
 # API Documentation
 
 Overview paragraph.
@@ -556,11 +592,12 @@ Description of endpoint.
 ## Error Handling
 
 Error handling details.
-```
+
+````
 
 ### Tutorial Template
 
-```markdown
+````markdown
 # Tutorial Title
 
 What you'll learn.
@@ -596,7 +633,10 @@ Testing instructions.
 ## Next Steps
 
 What to do next.
-```
+
+````
+
+<!-- markdownlint-enable MD031 -->
 
 ## Emergency Fixes
 
@@ -616,7 +656,7 @@ Most violations are **missing blank lines**. When in doubt, add them.
 
 ---
 
-**Goal:** Zero violations on first generation
-**Method:** Follow these patterns
-**Validation:** `markdownlint filename.md`
+**Goal:** Zero violations on first generation  
+**Method:** Follow these patterns  
+**Validation:** `markdownlint filename.md`  
 **Result:** Perfect markdown

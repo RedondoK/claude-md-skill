@@ -63,6 +63,7 @@ Before generating ANY markdown, mentally review:
 - [ ] What heading levels are needed? (Verify progression)
 - [ ] What list style will I use? (Stick to `-` throughout)
 - [ ] Does the content need a language identifier for code? (Always specify)
+- [ ] Am I showing markdown examples with code blocks? (Use four backticks)
 - [ ] Are any lines too long? (Keep under 80 characters when possible)
 - [ ] Will I need line breaks within paragraphs? (Use two trailing spaces)
 - [ ] Will I use proper spacing? (Regular spaces only, no nbsp or tabs)
@@ -143,6 +144,7 @@ Text
 - Add blank line AFTER code block
 - Specify language identifier
 - Use ``` for fencing (not ~~~)
+- Use more backticks for nested examples (see below)
 
 **Template:**
 
@@ -166,6 +168,48 @@ code here
 ```
 More text.
 ````
+
+#### Nested Code Block Rule (CRITICAL)
+
+When showing markdown examples that contain code blocks, use **one more
+backtick** than the deepest nested level:
+
+- **Three backticks (```)**: Regular code blocks
+- **Four backticks (````)**: Showing markdown with code blocks
+- **Five backticks (`````)**: Showing markdown showing markdown with code
+  blocks
+
+**Example - Wrong (causes MD040):**
+
+<!-- markdownlint-disable MD031 MD040 -->
+
+````markdown
+```markdown
+# Example Document
+
+```bash
+command here
+```
+```
+````
+
+<!-- markdownlint-enable MD031 MD040 -->
+
+**Example - Right:**
+
+`````markdown
+````markdown
+# Example Document
+
+```bash
+command here
+```
+
+````
+`````
+
+The parser needs the extra backtick to distinguish the outer fence from inner
+fences.
 
 ### Rule 4: Line Length (MD013)
 
@@ -693,10 +737,11 @@ After generating markdown, verify:
 4. **Heading levels:** Progression is 1→2→3→4, no skipping
 5. **List markers:** All use `-` consistently
 6. **Code languages:** Every code block has a language identifier
-7. **Line length:** Lines under 80 characters (check long descriptions)
-8. **File ending:** File ends with exactly one newline
-9. **Line breaks:** Two trailing spaces used intentionally, not accidentally
-10. **Character encoding:** Only regular spaces used for indentation (no nbsp,
+7. **Nested fences:** Four backticks used for markdown examples with code
+8. **Line length:** Lines under 80 characters (check long descriptions)
+9. **File ending:** File ends with exactly one newline
+10. **Line breaks:** Two trailing spaces used intentionally, not accidentally
+11. **Character encoding:** Only regular spaces used for indentation (no nbsp,
     no tabs)
 
 ## Mental Model for Generation
@@ -758,6 +803,21 @@ code
 
 text
 ````
+
+### Every Time You Show Markdown Examples with Code
+
+Use four backticks (one more than the deepest nested level):
+
+`````markdown
+````markdown
+# Example
+
+```bash
+command
+```
+
+````
+`````
 
 ### Every Time You Nest Lists
 
@@ -1005,10 +1065,11 @@ When in doubt:
 2. Use `-` for list markers
 3. Use `#` for headings (ATX style)
 4. Specify language for code blocks
-5. Increment heading levels by one
-6. Use two trailing spaces for intentional line breaks
-7. Test on target platform (GitHub, VS Code, etc.)
-8. Use regular spaces only (never nbsp or tabs)
+5. Use four backticks when showing markdown with code blocks
+6. Increment heading levels by one
+7. Use two trailing spaces for intentional line breaks
+8. Test on target platform (GitHub, VS Code, etc.)
+9. Use regular spaces only (never nbsp or tabs)
 
 Follow these rules, and your markdown will be perfect.
 

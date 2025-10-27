@@ -49,6 +49,81 @@ issues. This skill eliminates those problems by providing:
 3. Validate output with: `markdownlint filename.md`
 4. Expect zero violations
 
+## Deploying to Claude
+
+This skill can be uploaded to Claude as a custom skill, making it automatically
+available whenever you generate markdown files.
+
+### Prerequisites
+
+- Claude Pro, Team, or Enterprise plan
+- Code execution and file creation enabled
+
+### Deployment Steps
+
+1. **Create the skill package:**
+
+   Run one of these commands in the repository root:
+
+   ```bash
+   # Option 1: Python (cross-platform)
+   python create_zip.py
+
+   # Option 2: Windows batch (double-click)
+   create-skill-zip.bat
+
+   # Option 3: Git Bash
+   ./create-skill-zip.sh
+   ```
+
+   This creates `markdown.zip` in the repo root.
+
+2. **Upload to Claude:**
+
+   - Go to <https://claude.ai/settings/capabilities> or to Settings when using
+the Claude Desktop app
+   - Ensure "Code execution and file creation" is enabled
+   - Scroll to the Skills section
+   - Click "Upload skill"
+   - Select `markdown.zip`
+   - Toggle the skill ON (should be automatic upon upload)
+
+3. **Test the skill:**
+
+   Ask Claude:
+
+   > "Create a README.md for a Python web scraper project"
+
+   Claude should automatically use the markdown skill and generate perfect,
+   markdownlint-compliant markdown.
+
+### What Gets Deployed
+
+The `markdown.zip` file contains:
+
+```text
+markdown/
+├── SKILL.md              # Core skill instructions
+├── README.md             # Skill documentation
+├── LICENSE               # MIT license
+└── references/           # Detailed references
+    ├── complete-rules.md
+    ├── edge-cases.md
+    ├── examples.md
+    └── README.md
+```
+
+### Updating the Skill
+
+When a new version is released:
+
+1. Pull the latest changes from the repository
+2. Run the packaging script again to create `markdown.zip`
+3. Upload the new ZIP file to Claude (it will replace the old version)
+4. The skill will automatically use the updated instructions
+
+See `RELEASE_WORKFLOW.md` for the complete release process.
+
 ## What Problems Does This Solve?
 
 ### Before This Skill
@@ -91,6 +166,10 @@ md_skill_md/
 ├── .gitignore                        # Git ignore patterns
 ├── .gitattributes                    # Git line ending normalization
 ├── .markdownlintrc                   # Markdownlint configuration
+├── create_zip.py                     # Python packaging script
+├── create-skill-zip.bat              # Windows packaging script
+├── create-skill-zip.sh               # Bash packaging script
+├── RELEASE_WORKFLOW.md               # Release and packaging workflow
 ├── examples/                         # Example markdown files
 │   ├── correct/                      # Correctly formatted examples
 │   │   ├── code-blocks-correct.md
@@ -135,6 +214,7 @@ md_skill_md/
 - Core skill and documentation files that users interact with directly
 - All essential guides and references
 - Configuration files for tools and git
+- Packaging scripts for creating distribution ZIPs
 
 **examples/:** Correct and incorrect markdown examples for learning
 
@@ -143,6 +223,7 @@ md_skill_md/
 **rules/:** Detailed rule documentation and violation references
 
 **markdown/:** Standalone variant of the skill focused on markdown-only use
+(this is what gets packaged in `markdown.zip`)
 
 **resources/:** Additional reference materials and edge case documentation
 

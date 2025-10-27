@@ -1,11 +1,12 @@
 ---
 name: markdown
-version: 1.1.2
-description: Transform AI markdown generation to be 100% markdownlint-compliant. Use this skill whenever generating or editing markdown files (.md) for technical documentation, README files, guides, tutorials, or any GFM content requiring zero markdownlint violations.
+description: Transform AI markdown generation to be 100% markdownlint-compliant. Use this skill whenever generating messages containing markdown, generating or editing markdown files (.md) for technical documentation, README files, guides, tutorials, or any GFM content requiring clean, professional presentation.
 license: MIT. See LICENSE for complete terms
 ---
 
 # GitHub Flavored Markdown Generation
+
+**Version:** 1.1.2
 
 Generate GFM that passes markdownlint validation with zero violations.
 
@@ -82,6 +83,24 @@ code()
 
 Text.
 ````
+
+**Nested Fences:** When showing markdown examples that contain code blocks,
+use **one more backtick** than the deepest level:
+
+- Three backticks (` ``` `): Regular code
+- Four backticks (` ```` `): Markdown examples with code
+- Five backticks (` ````` `): Nested markdown examples
+
+`````markdown
+````markdown
+# Example
+
+```bash
+command
+```
+
+````
+`````
 
 ### Line Length (MD013)
 
