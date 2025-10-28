@@ -1,8 +1,8 @@
 # GitHub Flavored Markdown Skill for AI Systems
 
-**Version:** 1.1.2
+**Version:** 1.1.3
 **Status:** Production Ready
-**Last Updated:** 2025-10-24
+**Last Updated:** 2025-10-27
 
 ## Overview
 
@@ -317,6 +317,14 @@ markdownlint filename.md
 - ✅ Immediate usability in production
 
 ## Version History
+
+### v1.1.3 (2025-10-27)
+
+- Fixed all markdownlint violations in production support files (51 total)
+- Reorganized repository structure for clarity
+- Created validate-production.sh script for pre-release validation
+- Moved development artifacts to roadwork/ directory
+- Impact: HIGH - Production-ready deliverables, clean repository
 
 ### v1.1.2 (2025-10-24)
 

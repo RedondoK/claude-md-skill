@@ -118,14 +118,18 @@ These files intentionally violate markdownlint rules to verify that:
 - `md001-heading-increment.md` - Tests heading level progression (MD001)
 - `md004-inconsistent-list-markers.md` - Tests list marker consistency
   (MD004)
-- `md022-headings-without-blanks.md` - Tests blank lines around headings (MD022)
-- `md031-md040-code-blocks.md` - Tests code block formatting (MD031, MD040)
-- `md032-lists-without-blanks.md` - Tests blank lines around lists (MD032)
+- `md022-headings-without-blanks.md` - Tests blank lines around headings
+  (MD022)
+- `md031-md040-code-blocks.md` - Tests code block formatting (MD031,
+  MD040)
+- `md032-lists-without-blanks.md` - Tests blank lines around lists
+  (MD032)
 - `multiple-violations.md` - Tests multiple violation types together
 
 ### Perfect Documents
 
-These files demonstrate correct markdown formatting that passes all markdownlint rules.
+These files demonstrate correct markdown formatting that passes all
+markdownlint rules.
 
 **Test Files:**
 

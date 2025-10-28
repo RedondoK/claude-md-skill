@@ -6,7 +6,7 @@ license: MIT. See LICENSE for complete terms
 
 # GitHub Flavored Markdown Generation
 
-**Version:** 1.1.2
+**Version:** 1.1.3
 
 Generate GFM that passes markdownlint validation with zero violations.
 

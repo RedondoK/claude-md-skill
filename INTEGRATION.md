@@ -1,6 +1,6 @@
 # Integration Guide: GitHub Flavored Markdown Skill
 
-**Version:** 1.1.2
+**Version:** 1.1.3
 **Purpose:** Integrate this skill into AI systems and workflows
 
 ## Overview

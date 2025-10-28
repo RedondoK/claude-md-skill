@@ -5,11 +5,11 @@ All notable changes to this skill will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.3] - 2025-10-27
 
 ### Fixed
 
-- Fixed all markdownlint violations in production support files (51 total)
+- Fixed all markdownlint violations in production support files (52 total)
 - Fixed resources/MARKDOWN_VALIDATION_TRAPS.md (6 violations)
   - Added blank lines around code blocks
   - Added language identifiers to code blocks
@@ -23,9 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Fixed line length violations throughout document
   - Fixed ordered list numbering in summary sections
   - Added language identifier to mental model code block
-- Fixed tests/README.md (5 violations)
+- Fixed tests/README.md (6 violations)
   - Fixed line length violations in overview and examples
   - Wrapped long descriptions properly
+  - Fixed final line length issue (line 128)
 
 ### Changed
 
@@ -421,6 +422,6 @@ Contributions welcome! Please:
 
 ---
 
-**Current Version:** 1.1.2
+**Current Version:** 1.1.3
 **Status:** Production Ready
-**Last Updated:** 2025-10-26
+**Last Updated:** 2025-10-27

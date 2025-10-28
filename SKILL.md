@@ -1,6 +1,6 @@
 # GitHub Flavored Markdown (GFM) Skill
 
-**Version:** 1.1.2
+**Version:** 1.1.3
 **Purpose:** Transform AI markdown generation to be 100% markdownlint-compliant
 **Target:** Zero markdownlint violations in all generated markdown
 
@@ -975,6 +975,14 @@ Consult `resources/MARKDOWN_VALIDATION_TRAPS.md` for platform-specific
 guidance.
 
 ## Version History
+
+### v1.1.3 (2025-10-27)
+
+- **FIX:** Resolved all markdownlint violations in production support files (51 total)
+- **CLEANUP:** Reorganized repository structure for clarity
+- **TOOLING:** Created validate-production.sh script for pre-release validation
+- **STRUCTURE:** Moved development artifacts to roadwork/ directory
+- Impact: HIGH - Production-ready deliverables, clean repository organization
 
 ### v1.1.2 (2025-10-24)
 

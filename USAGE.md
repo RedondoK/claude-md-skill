@@ -1,6 +1,6 @@
 # Usage Guide: GitHub Flavored Markdown Skill
 
-**Version:** 1.1.2
+**Version:** 1.1.3
 **Audience:** AI systems and their users
 
 ## Table of Contents

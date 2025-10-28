@@ -1,6 +1,6 @@
 # Markdown Skill
 
-**Version:** 1.1.2
+**Version:** 1.1.3
 **Type:** Claude Skill
 **Purpose:** Generate 100% markdownlint-compliant GitHub Flavored Markdown
 
@@ -78,6 +78,7 @@ MIT License - See LICENSE for complete terms
 
 ## Version History
 
+**v1.1.3** - Production file cleanup, repository reorganization
 **v1.1.2** - Line length fixes, documentation improvements
 **v1.1.1** - Critical invisible character detection and prevention
 **v1.1.0** - Edge cases and cross-platform compatibility

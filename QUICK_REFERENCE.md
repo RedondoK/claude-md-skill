@@ -1,6 +1,6 @@
 # Quick Reference: GitHub Flavored Markdown
 
-**Version:** 1.1.2 | Print this page for desk reference
+**Version:** 1.1.3 | Print this page for desk reference
 
 ## The Golden Rules
 
