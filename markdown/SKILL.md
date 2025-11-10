@@ -6,7 +6,7 @@ license: MIT. See LICENSE for complete terms
 
 # GitHub Flavored Markdown Generation
 
-**Version:** 1.1.3
+**Version:** 1.2.0
 
 Generate GFM that passes markdownlint validation with zero violations.
 
@@ -48,6 +48,10 @@ Generate GFM that passes markdownlint validation with zero violations.
 - [ ] Lines under 80 chars?
 - [ ] Line breaks needed? (two trailing spaces)
 - [ ] Using regular spaces only?
+- [ ] URLs wrapped in `<>` or `[]`?
+- [ ] Document starts with H1?
+- [ ] Ordered lists use `1.` for all items?
+- [ ] File ends with single newline?
 
 ## Essential Rules
 
@@ -105,6 +109,49 @@ command
 ### Line Length (MD013)
 
 Break long lines at natural points. Use reference-style links for long URLs.
+
+### URLs and Email (MD034)
+
+Wrap bare URLs and emails:
+
+```markdown
+Wrong: https://example.com
+Right: <https://example.com>
+Right: [link](https://example.com)
+
+Wrong: user@example.com
+Right: <user@example.com>
+```
+
+### Document Structure (MD041)
+
+Start with H1 (or front matter then H1):
+
+```markdown
+# Document Title
+
+First paragraph.
+```
+
+### Ordered Lists (MD029)
+
+Use `1.` for all items:
+
+```markdown
+1. First
+1. Second
+1. Third
+```
+
+### File Endings (MD047)
+
+End with single newline:
+
+```text
+Last content line.
+[single newline]
+[EOF]
+```
 
 ### Character Encoding
 
@@ -246,9 +293,12 @@ Text.
 5. All lists use `-`
 6. All code has language
 7. Lines under 80 chars
-8. File ends with one newline
-9. Two trailing spaces used intentionally
-10. Only regular spaces (no nbsp/tabs)
+8. Document starts with H1
+9. URLs wrapped properly
+10. Ordered lists use `1.`
+11. File ends with one newline
+12. Two trailing spaces used intentionally
+13. Only regular spaces (no nbsp/tabs)
 
 ## Mental Model
 
@@ -309,6 +359,17 @@ text
 - parent
   - child
 - parent
+```
+
+**Ordered:**
+
+```markdown
+text
+
+1. item
+1. item
+
+text
 ```
 
 ## Common Languages

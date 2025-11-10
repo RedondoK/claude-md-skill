@@ -2,7 +2,7 @@
 
 # markdownlint Rules Reference
 
-**Version:** 1.1.2
+**Version:** 1.2.0
 **Source:** DavidAnson/markdownlint
 **Latest:** 53+ rules
 **Purpose:** Comprehensive reference for markdown validation
@@ -401,11 +401,280 @@ Use spaces instead of tabs for indentation.
 
 Tabs render differently in different environments. Spaces ensure consistent rendering.
 
+## Professional Quality Rules
+
+### MD034 - No Bare URLs
+
+**Category:** url, links
+**Severity:** HIGH
+**Impact:** Clickability, linting, professionalism
+
+#### Rule Description
+
+Bare URLs and email addresses must be wrapped in angle brackets or formatted
+as proper links.
+
+#### Incorrect Examples
+
+```markdown
+Visit https://example.com for details.
+Contact support@example.com for help.
+```
+
+#### Correct Examples
+
+```markdown
+Visit <https://example.com> for details.
+Contact <support@example.com> for help.
+
+Or with descriptive text:
+Visit [our website](https://example.com) for details.
+Contact [support](mailto:support@example.com) for help.
+```
+
+#### Rationale
+
+Bare URLs may not be clickable in all markdown renderers. Wrapping in angle
+brackets ensures proper linking and prevents auto-link parsing issues with
+underscores or other special characters.
+
+### MD041 - First Line Should Be Top-Level Heading
+
+**Category:** headings
+**Severity:** MEDIUM-HIGH
+**Impact:** Document structure, accessibility, navigation
+
+#### Rule Description
+
+The first line of content should be a top-level (H1) heading, except when
+preceded by front matter.
+
+#### Incorrect Example
+
+```markdown
+This is an introduction paragraph.
+
+## Section Heading
+```
+
+#### Correct Examples
+
+```markdown
+# Document Title
+
+This is an introduction paragraph.
+
+## Section Heading
+```
+
+With front matter:
+
+```markdown
+---
+title: My Document
+---
+
+# Document Title
+
+Content here.
+```
+
+#### Rationale
+
+Starting with H1 provides clear document structure for screen readers,
+document outlines, and SEO. It establishes the document's primary topic
+immediately.
+
+### MD029 - Ordered List Item Prefix
+
+**Category:** bullet
+**Severity:** MEDIUM
+**Impact:** Consistency, maintainability
+
+#### Rule Description
+
+Ordered list items should use consistent prefixes. The recommended style is
+to use `1.` for all items, allowing the renderer to auto-number.
+
+#### Incorrect Example
+
+```markdown
+1. First item
+2. Second item
+3. Third item
+```
+
+#### Correct Example
+
+```markdown
+1. First item
+1. Second item
+1. Third item
+```
+
+#### Rationale
+
+Using `1.` for all items makes reordering easier (no renumbering needed) and
+is the standard in many style guides. Markdown renderers automatically
+display correct sequential numbers.
+
+### MD033 - No Inline HTML
+
+**Category:** html
+**Severity:** MEDIUM-HIGH
+**Impact:** Platform compatibility, security
+
+#### Rule Description
+
+Avoid using raw HTML in markdown. Use markdown syntax instead.
+
+#### Incorrect Examples
+
+```markdown
+<div>Content here</div>
+<br>
+<strong>Bold text</strong>
+```
+
+#### Correct Examples
+
+```markdown
+Content here
+
+Use two trailing spaces for line breaks.
+
+**Bold text**
+```
+
+#### Allowed Exceptions
+
+Some HTML may be necessary for:
+
+- Complex tables
+- Specific formatting not available in markdown
+- Platform-specific features
+
+#### Rationale
+
+Many platforms strip or sanitize HTML for security. Pure markdown ensures
+maximum compatibility across renderers.
+
+### MD026 - No Trailing Punctuation in Headings
+
+**Category:** headings
+**Severity:** MEDIUM
+**Impact:** Consistency, style
+
+#### Rule Description
+
+Headings should not end with punctuation marks (`.`, `,`, `:`, `;`).
+Question marks and exclamation points may be allowed depending on
+configuration.
+
+#### Incorrect Examples
+
+```markdown
+## Installation.
+## Prerequisites:
+## Getting Started;
+```
+
+#### Correct Examples
+
+```markdown
+## Installation
+## Prerequisites
+## Getting Started
+
+## What's Next (question marks often allowed)
+```
+
+#### Rationale
+
+Headings are labels, not sentences. Trailing punctuation is unnecessary and
+inconsistent with standard style guides.
+
+### MD045 - Images Should Have Alt Text
+
+**Category:** images, links
+**Severity:** MEDIUM
+**Impact:** Accessibility, SEO
+
+#### Rule Description
+
+All images must include alt text for accessibility.
+
+#### Incorrect Examples
+
+```markdown
+![](image.png)
+![](https://example.com/photo.jpg)
+```
+
+#### Correct Examples
+
+```markdown
+![Architecture diagram showing three-tier design](diagram.png)
+![Team photo from 2024 conference](https://example.com/photo.jpg)
+```
+
+#### Rationale
+
+Alt text is essential for:
+
+- Screen readers for visually impaired users
+- When images fail to load
+- Search engine optimization
+- Understanding content without images
+
+### MD048 - Code Fence Style
+
+**Category:** code
+**Severity:** LOW-MEDIUM
+**Impact:** Consistency
+
+#### Rule Description
+
+Use consistent code fence style throughout document. Options:
+
+- Backticks: `` ``` `` (RECOMMENDED)
+- Tildes: `~~~`
+
+#### Incorrect Example (mixed styles)
+
+````markdown
+```python
+code1()
+```
+
+~~~javascript
+code2();
+~~~
+````
+
+#### Correct Example
+
+````markdown
+```python
+code1()
+```
+
+```javascript
+code2();
+```
+````
+
+#### Rationale
+
+Consistent fence style improves readability and maintainability. Backticks are
+more widely recognized and supported.
+
 ## Additional Important Rules
 
 ### MD013 - Line length
 
-Lines should not exceed a specified length (default 80 characters). This is often disabled or set to a higher value (e.g., 120) for modern documents.
+Lines should not exceed a specified length (default 80 characters). Often set
+to 120 for modern documents.
 
 ### MD018/MD019 - No space after hash on atx style heading
 
@@ -418,30 +687,98 @@ Don't indent headings.
 
 ### MD024 - Multiple headings with the same content
 
-Avoid duplicate heading text in the same document.
+**Category:** headings
+**Severity:** LOW
+**Impact:** Navigation, anchor conflicts
+
+#### Description
+
+Avoid duplicate heading text in the same document section.
+
+#### Incorrect
+
+```markdown
+## Introduction
+
+Content.
+
+## Introduction
+
+More content.
+```
+
+#### Correct
+
+```markdown
+## Introduction
+
+Content.
+
+## Implementation
+
+More content.
+```
+
+#### Rationale
+
+Duplicate headings create ambiguous anchor links and confuse document
+navigation.
 
 ### MD025 - Multiple top-level headings
 
-Only one `#` (h1) heading per document.
+Only one `#` (H1) heading per document for proper hierarchy.
 
-### MD033 - Inline HTML
+### MD036 - No Emphasis as Heading Substitute
 
-Avoid using raw HTML in markdown. Use markdown syntax instead.
+**Category:** emphasis, headings
+**Severity:** MEDIUM
+**Impact:** Document structure, accessibility
 
-### MD034 - Bare URL used
+#### Incorrect
 
-**Incorrect:** `http://example.com`
-**Correct:** `<http://example.com>` or `[example](http://example.com)`
+```markdown
+**Section Title**
 
-### MD037 - Spaces inside emphasis markers
+Content here.
+```
 
-**Incorrect:** `** bold **`
-**Correct:** `**bold**`
+#### Correct
 
-### MD038 - Spaces inside code span elements
+```markdown
+## Section Title
+
+Content here.
+```
+
+#### Rationale
+
+Bold text is not a structural element. Screen readers and document outlines
+require proper heading tags.
+
+### MD037 - No Spaces Inside Emphasis Markers
+
+**Incorrect:** `** bold **` or `* italic *`
+**Correct:** `**bold**` or `*italic*`
+
+### MD038 - No Spaces Inside Code Spans
 
 **Incorrect:** `` ` code ` ``
 **Correct:** `` `code` ``
+
+### MD046 - Consistent Code Block Style
+
+**Category:** code
+**Severity:** LOW
+**Impact:** Consistency
+
+#### Description
+
+Use consistent code block style throughout document:
+
+- Fenced (` ``` `) - RECOMMENDED
+- Indented (4 spaces)
+
+Fenced blocks allow language specification for syntax highlighting.
 
 ## Rule Priority for AI Generation
 

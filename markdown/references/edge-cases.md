@@ -2,8 +2,8 @@
 
 # Markdown Validation Traps: Edge Cases and Cross-Platform Compatibility
 
-**Version:** 1.1.2
-**Date:** 2025-10-24
+**Version:** 1.2.0
+**Date:** 2025-11-10
 **Purpose:** Reference guide for markdown edge cases that cause silent failures
 
 ## Overview
@@ -470,20 +470,302 @@ Or for single line:
 
 These must be valid HTML comments.
 
+## Professional Quality Edge Cases
+
+### Bare URL Auto-Linking Inconsistencies
+
+**Problem:** URL auto-linking behavior varies across platforms and contexts.
+
+**GitHub.com:**
+
+- Auto-links most URLs without angle brackets
+- Fails with URLs containing underscores: `http://example.com/__word__`
+- May include/exclude trailing punctuation unpredictably
+
+**Example problem:**
+
+```markdown
+Visit http://site.com/__api__/docs for details.
+```
+
+The `__api__` is parsed as strong emphasis, corrupting the link.
+
+**Solution:** Always wrap URLs in angle brackets or use link syntax:
+
+```markdown
+Visit <http://site.com/__api__/docs> for details.
+Visit [API docs](http://site.com/__api__/docs) for details.
+```
+
+**Email addresses:**
+
+Similar issues occur with email addresses containing special characters:
+
+```markdown
+Wrong: contact+sales@example.com (+ may break)
+Right: <contact+sales@example.com>
+```
+
+### Document Structure Front Matter
+
+**Problem:** Different parsers handle front matter differently.
+
+**YAML front matter (standard):**
+
+```markdown
+---
+title: Document Title
+author: Keith Gendler
+date: 2025-11-10
+---
+
+# Main Title
+
+Content.
+```
+
+**TOML front matter (Hugo):**
+
+```markdown
++++
+title = "Document Title"
+author = "Keith Gendler"
++++
+
+# Main Title
+
+Content.
+```
+
+**JSON front matter (rare):**
+
+```markdown
+{
+  "title": "Document Title"
+}
+
+# Main Title
+
+Content.
+```
+
+**Markdownlint MD041:**
+
+Properly configured markdownlint recognizes standard YAML front matter and
+allows document to start with `---` delimiter. Custom front matter formats may
+trigger MD041 violations.
+
+**Recommendation:** Use YAML front matter for maximum compatibility.
+
+### Ordered List Renumbering Behavior
+
+**Problem:** Different renderers handle ordered list numbering differently.
+
+**Manual numbering issues:**
+
+When code blocks break list continuity due to improper indentation:
+
+```markdown
+1. First step
+2. Second step
+
+```python
+code()  # Not indented, breaks list
+```
+
+3. Third step (becomes item 1 in new list!)
+```
+
+**Using 1. for all items (recommended):**
+
+```markdown
+1. First step
+1. Second step
+
+   ```python
+   code()  # Properly indented
+   ```
+
+1. Third step (continues as item 3)
+```
+
+**Platform differences:**
+
+- GitHub: Automatically renumbers, showing 1, 2, 3 regardless of source
+- CommonMark: Displays source numbers unless broken by non-indented content
+- Jekyll: Depends on configuration and markdown engine
+
+**Recommendation:** Always use `1.` for all items. Easier to reorder and
+maintain. Let renderer handle numbering.
+
+### Image Alt Text Screen Reader Behavior
+
+**Problem:** Missing alt text creates poor accessibility experience.
+
+**What screen readers announce:**
+
+```markdown
+![](image.png)
+# Screen reader says: "Image" or "image.png" (unhelpful)
+
+![Architecture diagram](image.png)
+# Screen reader says: "Architecture diagram" (helpful)
+
+![System architecture showing three-tier web application with load balancer,
+application servers, and database cluster](diagram.png)
+# Screen reader says: [full descriptive text] (very helpful)
+```
+
+**Alt text best practices:**
+
+- Describe the content/purpose, not just the filename
+- For decorative images, use empty alt text: `![](decorative.png)`
+- For complex diagrams, provide detailed description
+- Don't start with "Image of" or "Picture of" (redundant)
+
+**SEO impact:**
+
+Search engines use alt text for image indexing. Descriptive alt text improves:
+
+- Image search results
+- Page relevance scoring
+- Accessibility compliance
+
+### Code Fence Style Parser Quirks
+
+**Problem:** Tilde fences (`~~~`) have inconsistent support.
+
+**GitHub:**
+
+Both backticks and tildes work:
+
+````markdown
+```python
+code()
+```
+
+~~~python
+code()
+~~~
+````
+
+**VS Code preview:**
+
+Both styles render correctly.
+
+**Some static site generators:**
+
+May only support backticks. Tildes treated as regular text.
+
+**Nested fences:**
+
+Backticks allow clearer nesting by using different counts:
+
+`````markdown
+````markdown
+```python
+code()
+```
+````
+`````
+
+Tilde nesting is more ambiguous.
+
+**Recommendation:** Use backticks exclusively for maximum compatibility and
+clearer nesting.
+
+### Heading Punctuation Parser Variations
+
+**Problem:** Different style guides have different rules.
+
+**Technical writing standards:**
+
+- No periods in headings
+- Question marks usually allowed
+- Exclamation points discouraged (except marketing)
+- Colons avoided (use em dash or rephrase)
+
+**Question mark examples:**
+
+```markdown
+## What's Next  <!-- Usually allowed -->
+## Why Choose This Tool  <!-- Better as statement -->
+## How Does It Work  <!-- Better: How It Works -->
+```
+
+**Markdownlint MD026 configuration:**
+
+Default: prohibits `. , : ;`
+
+Can configure to allow question marks:
+
+```json
+{
+  "MD026": {
+    "punctuation": ".,;:"
+  }
+}
+```
+
+**GitHub heading anchors with punctuation:**
+
+Punctuation is removed from anchor IDs:
+
+- `## What's Next?` becomes `#whats-next`
+- `## Installation:` becomes `#installation`
+- `## Let's Go!` becomes `#lets-go`
+
+### HTML in Markdown Security
+
+**Problem:** Raw HTML creates security vulnerabilities.
+
+**GitHub sanitization:**
+
+Dangerous tags are escaped:
+
+```markdown
+<script>alert('xss')</script>
+<!-- Rendered as: &lt;script&gt;alert('xss')&lt;/script&gt; -->
+
+<iframe src="evil.com"></iframe>
+<!-- Rendered as: &lt;iframe src="evil.com"&gt;&lt;/iframe&gt; -->
+```
+
+**Allowed HTML tags on GitHub:**
+
+- Basic formatting: `<b>`, `<i>`, `<strong>`, `<em>`
+- Structure: `<div>`, `<span>`, `<p>`, `<br>`
+- Tables: `<table>`, `<tr>`, `<td>`, `<th>`
+- Links: `<a>` (with sanitized `href`)
+
+**Blocked tags:**
+
+- `<script>`, `<style>`, `<iframe>`, `<object>`, `<embed>`
+- `<form>`, `<input>`, `<textarea>`, `<button>`
+- Event handlers: `onclick`, `onload`, etc.
+
+**Recommendation:** Avoid HTML unless absolutely necessary. Use pure markdown
+for maximum compatibility and security.
+
 ## Best Practices for Maximum Compatibility
 
 ### Defensive Authoring Checklist
 
 - [ ] Always use blank lines before tables and fenced code blocks
 - [ ] Stick to simple tables; use HTML for complex layouts
-- [ ] Wrap problematic URLs in angle brackets
+- [ ] Wrap all URLs in angle brackets or link syntax
+- [ ] Start document with H1 (after optional front matter)
+- [ ] Use `1.` for all ordered list items
+- [ ] Include descriptive alt text for all images
+- [ ] Use backtick fences consistently (never tildes)
+- [ ] Remove trailing punctuation from headings
+- [ ] Avoid inline HTML; use pure markdown
 - [ ] Use LF line endings exclusively (configure Git/editor)
 - [ ] Save files as UTF-8 without BOM
 - [ ] Verify indentation uses regular spaces only (no nbsp, no tabs)
 - [ ] Test rendering on target platform (GitHub, VS Code, etc.)
 - [ ] Run markdownlint with platform-specific configuration
 - [ ] Avoid nesting beyond two levels
-- [ ] Use fenced code blocks everywhere (never indented blocks)
 - [ ] Escape all pipe characters in tables: `&#124;`
 
 ### Two-Space Line Break Standard

@@ -1,8 +1,8 @@
 # GitHub Flavored Markdown Skill for AI Systems
 
-**Version:** 1.1.3
+**Version:** 1.2.0
 **Status:** Production Ready
-**Last Updated:** 2025-10-27
+**Last Updated:** 2025-11-10
 
 ## Overview
 
@@ -27,6 +27,8 @@ issues. This skill eliminates those problems by providing:
 - **Zero Violations Goal:** Generate markdown that passes markdownlint
   immediately
 - **Comprehensive Rule Coverage:** All critical markdownlint rules documented
+  with professional quality additions
+- **Professional Standards:** URL wrapping, document structure, accessibility
 - **Invisible Character Detection:** Identifies and prevents nbsp/tab issues
 - **Error Prevention:** Catch common mistakes before they happen
 - **Practical Examples:** Correct vs incorrect patterns for every rule
@@ -317,6 +319,18 @@ markdownlint filename.md
 - ✅ Immediate usability in production
 
 ## Version History
+
+### v1.2.0 (2025-11-10)
+
+- Added professional quality rules (MD034, MD041, MD029, MD026, MD045, MD048)
+- Enhanced URL and email handling with mandatory wrapping
+- Added document structure requirements (H1 first line)
+- Comprehensive ordered list guidance (use 1. for all items)
+- Image accessibility with alt text requirements
+- Code fence style consistency guidelines
+- Expanded reference documentation with 300+ new examples
+- Updated all checklists and validation steps
+- Impact: HIGH - Professional documentation standards
 
 ### v1.1.3 (2025-10-27)
 

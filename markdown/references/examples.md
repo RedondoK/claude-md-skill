@@ -2,7 +2,7 @@
 
 # Markdown Examples: Correct and Incorrect Patterns
 
-**Version:** 1.1.2  
+**Version:** 1.2.0  
 **Purpose:** Comprehensive examples showing correct markdown formatting and
 common mistakes to avoid.
 
@@ -494,6 +494,243 @@ Final content.
 
 **Problem:** MD047 violation. File should end with exactly one newline.
 
+## URL and Email Examples
+
+### ✅ Correct: Wrapped URLs
+
+Visit <https://example.com> for more information.
+
+Contact <support@example.com> for help.
+
+Or with descriptive text:
+
+Visit [our website](https://example.com) for details.
+
+**Why correct:** URLs and emails wrapped in angle brackets or formatted as
+links.
+
+### ❌ Incorrect: Bare URLs
+
+<!-- markdownlint-disable MD034 -->
+
+```markdown
+Visit https://example.com for more information.
+Contact support@example.com for help.
+```
+
+<!-- markdownlint-enable MD034 -->
+
+**Problem:** MD034 violation. URLs may not be clickable in all renderers.
+
+## Document Structure Examples
+
+### ✅ Correct: Document Starting with H1
+
+```markdown
+# Document Title
+
+Introduction paragraph.
+
+## First Section
+```
+
+**Why correct:** Document starts with H1, establishing clear hierarchy.
+
+### ✅ Correct: Document with Front Matter
+
+```markdown
+---
+title: My Document
+author: Keith Gendler
+---
+
+# Document Title
+
+Content here.
+```
+
+**Why correct:** Front matter allowed before H1.
+
+### ❌ Incorrect: Document Missing H1
+
+<!-- markdownlint-disable MD041 -->
+
+```markdown
+Introduction paragraph without heading.
+
+## First Section
+```
+
+<!-- markdownlint-enable MD041 -->
+
+**Problem:** MD041 violation. Document should start with H1 for structure.
+
+## Ordered List Examples
+
+### ✅ Correct: Using 1. for All Items
+
+Simple ordered list:
+
+1. First item
+1. Second item
+1. Third item
+
+**Why correct:** Using `1.` for all items. Renderer auto-numbers.
+
+### ✅ Correct: Nested Ordered Lists
+
+Nested example:
+
+1. Top level
+   1. Nested first
+   1. Nested second
+1. Back to top
+
+**Why correct:** Consistent `1.` throughout. Easy to reorder.
+
+### ❌ Incorrect: Manual Numbering
+
+<!-- markdownlint-disable MD029 -->
+
+```markdown
+1. First item
+2. Second item
+3. Third item
+```
+
+<!-- markdownlint-enable MD029 -->
+
+**Problem:** MD029 violation. Manual numbering makes reordering harder.
+
+## Image Alt Text Examples
+
+### ✅ Correct: Images with Descriptive Alt Text
+
+Diagram:
+
+![System architecture showing three-tier design](architecture.png)
+
+Photo:
+
+![Team meeting at 2024 conference in San Francisco](team-photo.jpg)
+
+**Why correct:** Descriptive alt text for accessibility and SEO.
+
+### ❌ Incorrect: Images Without Alt Text
+
+<!-- markdownlint-disable MD045 -->
+
+```markdown
+![](architecture.png)
+![](team-photo.jpg)
+```
+
+<!-- markdownlint-enable MD045 -->
+
+**Problem:** MD045 violation. Screen readers can't describe images.
+
+## Code Fence Style Examples
+
+### ✅ Correct: Consistent Backtick Fences
+
+Python code:
+
+```python
+def hello():
+    print("Hello")
+```
+
+JavaScript code:
+
+```javascript
+function hello() {
+    console.log("Hello");
+}
+```
+
+**Why correct:** Consistent backtick style throughout.
+
+### ❌ Incorrect: Mixed Fence Styles
+
+<!-- markdownlint-disable MD048 -->
+
+````markdown
+```python
+code1()
+```
+
+~~~javascript
+code2();
+~~~
+````
+
+<!-- markdownlint-enable MD048 -->
+
+**Problem:** MD048 violation. Mixed backticks and tildes.
+
+## Heading Punctuation Examples
+
+### ✅ Correct: Headings Without Punctuation
+
+```markdown
+## Installation
+## Prerequisites
+## Getting Started
+```
+
+**Why correct:** Headings are labels, not sentences.
+
+### ✅ Correct: Question Mark Allowed
+
+```markdown
+## What's Next
+## Why Use This Tool
+```
+
+**Why correct:** Question marks often allowed in configuration.
+
+### ❌ Incorrect: Trailing Punctuation
+
+<!-- markdownlint-disable MD026 -->
+
+```markdown
+## Installation.
+## Prerequisites:
+## Getting Started;
+```
+
+<!-- markdownlint-enable MD026 -->
+
+**Problem:** MD026 violation. Unnecessary trailing punctuation.
+
+## HTML Usage Examples
+
+### ✅ Correct: Pure Markdown
+
+Content formatting:
+
+**Bold text** using markdown syntax.
+
+*Italic text* using markdown syntax.
+
+Use two trailing spaces for line break.
+
+**Why correct:** Pure markdown for maximum compatibility.
+
+### ❌ Incorrect: Inline HTML
+
+<!-- markdownlint-disable MD033 -->
+
+```markdown
+<div>Content here</div>
+<strong>Bold text</strong>
+<br>
+```
+
+<!-- markdownlint-enable MD033 -->
+
+**Problem:** MD033 violation. HTML may be stripped by renderers.
+
 ## Summary
 
 **Key Patterns to Remember:**
@@ -505,9 +742,15 @@ Final content.
 5. **Line length** under 80 characters (when possible)
 6. **Regular spaces only** for indentation (never nbsp or tabs)
 7. **Heading hierarchy** increments by one level
-8. **One H1** per document
-9. **File ending** with exactly one newline
-10. **No spaces** inside emphasis or code span markers
+8. **One H1** per document (starts document)
+9. **Wrap URLs** in angle brackets or links
+10. **Ordered lists** use `1.` for all items
+11. **Alt text** for all images
+12. **Consistent fence style** (backticks recommended)
+13. **No trailing punctuation** in headings
+14. **File ending** with exactly one newline
+15. **No spaces** inside emphasis or code span markers
+16. **Pure markdown** preferred over HTML
 
 These examples demonstrate the most common patterns and mistakes. For complete
 rule documentation, see `complete-rules.md`.

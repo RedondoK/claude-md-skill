@@ -1,6 +1,6 @@
 # Reference Files
 
-**Version:** 1.1.2  
+**Version:** 1.2.0  
 **Purpose:** Comprehensive reference documentation for markdown generation
 
 ## Contents
