@@ -6,7 +6,7 @@ license: MIT. See LICENSE for complete terms
 
 # GitHub Flavored Markdown Generation
 
-**Version:** 1.2.0
+**Version:** 1.2.1
 
 Generate GFM that passes markdownlint validation with zero violations.
 
@@ -52,6 +52,7 @@ Generate GFM that passes markdownlint validation with zero violations.
 - [ ] Document starts with H1?
 - [ ] Ordered lists use `1.` for all items?
 - [ ] File ends with single newline?
+- [ ] Tables use consistent spacing?
 
 ## Essential Rules
 
@@ -152,6 +153,24 @@ Last content line.
 [single newline]
 [EOF]
 ```
+
+### Table Column Style (MD060)
+
+Use consistent spacing in tables. Three styles:
+
+**Compact (recommended):** `| cell |` - single space around content
+
+```markdown
+| Header 1 | Header 2 |
+| --- | --- |
+| Data | More data |
+```
+
+**Aligned:** Pipes vertically aligned with padding
+
+**Tight:** `|cell|` - no spaces
+
+Pick ONE style per document. Compact is preferred.
 
 ### Character Encoding
 
@@ -299,6 +318,7 @@ Text.
 11. File ends with one newline
 12. Two trailing spaces used intentionally
 13. Only regular spaces (no nbsp/tabs)
+14. Tables use consistent column spacing
 
 ## Mental Model
 
@@ -368,6 +388,18 @@ text
 
 1. item
 1. item
+
+text
+```
+
+**Table:**
+
+```markdown
+text
+
+| Header | Header |
+| --- | --- |
+| Cell | Cell |
 
 text
 ```
