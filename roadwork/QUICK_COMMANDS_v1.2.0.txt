@@ -1,0 +1,51 @@
+# Quick Commands for Version 1.2.0 Release
+
+## Stage and Commit (Git Bash)
+
+```bash
+# Navigate to repository
+cd /c/Users/kgend/Projects/md_skill_md
+
+# Make script executable
+chmod +x roadwork/stage-and-commit-v1.2.0.sh
+
+# Run staging script
+./roadwork/stage-and-commit-v1.2.0.sh
+
+# Commit with prepared message
+git commit -F roadwork/COMMIT_MESSAGE_v1.2.0.txt
+
+# Tag the release
+git tag -a v1.2.0 -m "Version 1.2.0: Professional quality rules"
+
+# Push to repository
+git push origin main
+git push origin v1.2.0
+```
+
+## Validation (Git Bash)
+
+```bash
+# Validate all updated files
+markdownlint markdown/SKILL.md markdown/references/*.md README.md CHANGELOG.md roadwork/test-plan-update-suggestions.md
+
+# Expected: No output (zero violations)
+```
+
+## Files to Commit
+
+- markdown/SKILL.md
+- markdown/README.md
+- markdown/references/README.md
+- markdown/references/complete-rules.md
+- markdown/references/examples.md
+- markdown/references/edge-cases.md
+- README.md
+- CHANGELOG.md
+- roadwork/test-plan-update-suggestions.md (new)
+
+## Documentation
+
+- Commit message: `roadwork/COMMIT_MESSAGE_v1.2.0.txt`
+- Release summary: `roadwork/v1.2.0-release-summary.md`
+- This file: `roadwork/QUICK_COMMANDS_v1.2.0.txt`

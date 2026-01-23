@@ -1,6 +1,6 @@
 # GitHub Flavored Markdown (GFM) Skill
 
-**Version:** 1.1.3
+**Version:** 1.2.0
 **Purpose:** Transform AI markdown generation to be 100% markdownlint-compliant
 **Target:** Zero markdownlint violations in all generated markdown
 
@@ -67,6 +67,7 @@ Before generating ANY markdown, mentally review:
 - [ ] Are any lines too long? (Keep under 80 characters when possible)
 - [ ] Will I need line breaks within paragraphs? (Use two trailing spaces)
 - [ ] Will I use proper spacing? (Regular spaces only, no nbsp or tabs)
+- [ ] Will tables be needed? (Use consistent column spacing style)
 
 ## Generation Rules
 
@@ -466,6 +467,91 @@ Note: The four spaces before the fence are regular spaces (U+0020), not nbsp
 
 <!-- markdownlint-enable MD032 MD031 MD040 -->
 
+### Rule 9: Table Column Style (MD060)
+
+**IMPORTANT:** Tables must use consistent column spacing throughout. MD060
+enforces three recognized styles.
+
+**Supported Styles:**
+
+1. **Compact (RECOMMENDED):** Single space around cell content
+2. **Aligned:** Pipe characters vertically aligned with padding
+3. **Tight:** No spaces around cell content
+
+#### Style: Compact (Default Recommendation)
+
+Use exactly one space around cell content:
+
+```markdown
+| Header 1 | Header 2 |
+| --- | --- |
+| Short | Longer content |
+| More | Data |
+```
+
+Note: The delimiter row uses `---` with single spaces around pipes.
+
+#### Style: Aligned
+
+Pipe characters align vertically with padded content:
+
+```markdown
+| Header 1 | Header 2       |
+| -------- | -------------- |
+| Short    | Longer content |
+| More     | Data           |
+```
+
+#### Style: Tight
+
+No spaces around content (minimal whitespace):
+
+```markdown
+|Header 1|Header 2|
+|---|---|
+|Short|Longer content|
+|More|Data|
+```
+
+**Common Violations:**
+
+<!-- markdownlint-disable MD060 -->
+
+```markdown
+Wrong - Inconsistent spacing (mixes compact and tight):
+| Header 1| Header 2 |
+| --- |---|
+| Data|More data |
+```
+
+<!-- markdownlint-enable MD060 -->
+
+**ALWAYS:**
+
+- Choose ONE style for all tables in a document
+- Apply spacing consistently to ALL rows (header, delimiter, data)
+- Use compact style (`| cell |`) unless aligned tables are required
+- Include spaces around content in compact style tables
+
+**NEVER:**
+
+- Mix spacing styles within a single table
+- Mix spacing styles across tables in the same document
+- Forget spaces in compact style (`|cell|` when using compact is wrong)
+- Add inconsistent padding (`| cell |` vs `|cell |`)
+
+**Configuration:**
+
+Markdownlint MD060 accepts these style options:
+
+- `any` (default) - Detects best-fit style, reports inconsistencies
+- `compact` - Enforces `| cell |` style
+- `aligned` - Enforces padded, vertically-aligned pipes
+- `tight` - Enforces `|cell|` style
+
+The `aligned_delimiter` parameter can require delimiter row alignment with
+compact or tight styles.
+
 ## Critical Error Prevention
 
 ### Error Pattern 1: List Without Blank Lines
@@ -743,6 +829,8 @@ After generating markdown, verify:
 10. **Line breaks:** Two trailing spaces used intentionally, not accidentally
 11. **Character encoding:** Only regular spaces used for indentation (no nbsp,
     no tabs)
+12. **Table style:** Tables use consistent column spacing (compact, aligned,
+    or tight)
 
 ## Mental Model for Generation
 
@@ -842,6 +930,22 @@ Use regular spaces (U+0020), never:
 - Non-breaking spaces (U+00A0, &nbsp;)
 - Tabs
 - Other invisible characters
+
+### Every Time You Generate a Table
+
+Use consistent spacing (compact style recommended):
+
+```markdown
+| Header | Header |
+| --- | --- |
+| Cell | Cell |
+```
+
+Key points:
+
+- Single space after opening pipe: `| cell`
+- Single space before closing pipe: `cell |`
+- Consistent style for ALL rows
 
 ## Validation Command
 
@@ -976,9 +1080,20 @@ guidance.
 
 ## Version History
 
+### v1.2.0 (2026-01-23)
+
+- **NEW:** Added Rule 9 for Table Column Style (MD060)
+- **ENHANCEMENT:** Updated pre-generation checklist with table consistency
+  check
+- **ENHANCEMENT:** Updated post-generation validation with table style check
+- **ENHANCEMENT:** Added Quick Reference Card for table formatting
+- **ENHANCEMENT:** Updated Remember section with table style guidance
+- Impact: MEDIUM - Complete markdownlint coverage for table formatting
+
 ### v1.1.3 (2025-10-27)
 
-- **FIX:** Resolved all markdownlint violations in production support files (51 total)
+- **FIX:** Resolved all markdownlint violations in production support files
+  (51 total)
 - **CLEANUP:** Reorganized repository structure for clarity
 - **TOOLING:** Created validate-production.sh script for pre-release validation
 - **STRUCTURE:** Moved development artifacts to roadwork/ directory
@@ -1078,6 +1193,7 @@ When in doubt:
 7. Use two trailing spaces for intentional line breaks
 8. Test on target platform (GitHub, VS Code, etc.)
 9. Use regular spaces only (never nbsp or tabs)
+10. Use consistent table spacing (`| cell |` for compact style)
 
 Follow these rules, and your markdown will be perfect.
 

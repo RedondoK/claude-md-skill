@@ -2,7 +2,7 @@
 
 **Version:** 1.2.0
 **Status:** Production Ready
-**Last Updated:** 2025-11-10
+**Last Updated:** 2026-01-23
 
 ## Overview
 
@@ -320,17 +320,13 @@ markdownlint filename.md
 
 ## Version History
 
-### v1.2.0 (2025-11-10)
+### v1.2.0 (2026-01-23)
 
-- Added professional quality rules (MD034, MD041, MD029, MD026, MD045, MD048)
-- Enhanced URL and email handling with mandatory wrapping
-- Added document structure requirements (H1 first line)
-- Comprehensive ordered list guidance (use 1. for all items)
-- Image accessibility with alt text requirements
-- Code fence style consistency guidelines
-- Expanded reference documentation with 300+ new examples
-- Updated all checklists and validation steps
-- Impact: HIGH - Professional documentation standards
+- Added Rule 9: Table Column Style (MD060)
+- Updated pre-generation checklist with table consistency check
+- Added Quick Reference Card for table formatting
+- Updated Remember section with table style guidance
+- Impact: MEDIUM - Complete markdownlint coverage for table formatting
 
 ### v1.1.3 (2025-10-27)
 

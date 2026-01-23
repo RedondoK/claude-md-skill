@@ -63,6 +63,10 @@
 
 - MD044
 
+### table
+
+- MD055, MD056, MD058, MD060
+
 ### url
 
 - MD034
@@ -470,6 +474,66 @@ Avoid using raw HTML in markdown. Use markdown syntax instead.
 **Incorrect:** `` ` code ` ``  
 **Correct:** `` `code` ``
 
+### MD060 - Table column style
+
+**Category:** table  
+**Severity:** MEDIUM  
+**Impact:** Consistency and readability
+
+#### Rule Description
+
+Table column separator pipes must use consistent spacing. Three styles are
+recognized:
+
+**Compact:** Single space around content
+
+```markdown
+| Header | Header |
+| --- | --- |
+| Cell | Cell |
+```
+
+**Aligned:** Vertically aligned pipes with padding
+
+```markdown
+| Header | Header |
+| ------ | ------ |
+| Cell   | Cell   |
+```
+
+**Tight:** No spaces around content
+
+```markdown
+|Header|Header|
+|---|---|
+|Cell|Cell|
+```
+
+#### Configuration
+
+- `style`: `any` (default), `aligned`, `compact`, or `tight`
+- `aligned_delimiter`: Align delimiter row pipes (boolean, default `false`)
+
+#### Incorrect Example (mixed styles)
+
+```markdown
+| Header| Header |
+| --- |---|
+| Cell|Cell |
+```
+
+#### Correct Example (compact style)
+
+```markdown
+| Header | Header |
+| --- | --- |
+| Cell | Cell |
+```
+
+#### Rationale
+
+Consistent table formatting improves readability and maintainability.
+
 ## Rule Priority for AI Generation
 
 ### MUST FIX (Critical)
@@ -492,6 +556,7 @@ Avoid using raw HTML in markdown. Use markdown syntax instead.
 2. MD010 - Hard tabs
 3. MD018 - Space after hash
 4. MD023 - Headings at start of line
+5. MD060 - Table column style
 
 ## Testing Strategy
 

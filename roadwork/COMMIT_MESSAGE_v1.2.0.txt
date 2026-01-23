@@ -1,0 +1,98 @@
+feat: Add professional quality rules for version 1.2.0
+
+BREAKING: None (backward compatible enhancement)
+
+Added:
+- MD034: No bare URLs or email addresses (HIGH priority)
+  * URL wrapping with angle brackets or link syntax
+  * Email address wrapping for clickability
+  * Prevents auto-link parsing issues
+- MD041: First line should be H1 (MEDIUM-HIGH priority)
+  * Document structure for accessibility
+  * Front matter exceptions (YAML, TOML, JSON)
+  * Improves SEO and screen reader navigation
+- MD029: Ordered list prefix consistency (MEDIUM priority)
+  * Use 1. for all items (auto-numbering)
+  * Simplifies reordering and maintenance
+- MD026: No trailing punctuation in headings (MEDIUM priority)
+  * Technical writing standards compliance
+- MD045: Images should have alt text (MEDIUM priority)
+  * Accessibility for screen readers
+  * SEO benefits
+- MD048: Code fence style consistency (LOW-MEDIUM priority)
+  * Backticks only for maximum compatibility
+- MD033: Inline HTML guidance (MEDIUM-HIGH priority)
+  * Security and compatibility
+- MD036: No emphasis as heading substitute
+- MD037/MD038: No spaces inside markers
+
+Enhanced:
+- SKILL.md core document (version 1.2.0)
+  * Pre-generation checklist: 7 → 11 items
+  * Post-generation validation: 10 → 13 items
+  * Essential Rules sections for MD034, MD041, MD029, MD047
+  * Ordered list pattern in Quick Patterns
+  * Size: +1.5 KB (efficient, lean design maintained)
+- complete-rules.md reference (version 1.2.0)
+  * Professional Quality Rules section: 270+ lines
+  * Severity ratings and impact assessments
+  * Multiple examples per rule
+- examples.md reference (version 1.2.0)
+  * 8 new example categories: 250+ lines
+  * URL/email, document structure, ordered lists
+  * Image alt text, code fences, heading punctuation
+  * Summary: 10 → 16 key patterns
+- edge-cases.md reference (version 1.2.0)
+  * Professional Quality Edge Cases: 280+ lines
+  * URL auto-linking, front matter, list renumbering
+  * Alt text behavior, fence quirks, HTML security
+  * Defensive checklist: 11 → 20 items
+
+Added - Development:
+- test-plan-update-suggestions.md
+  * Comprehensive test plan for 9 new rules
+  * 3-phase implementation strategy
+  * Test templates and automation
+  * 9-14 hours estimated implementation
+
+Documentation:
+- Updated README.md (skill) to version 1.2.0
+- Updated README.md (repo) to version 1.2.0
+  * Enhanced key features with professional standards
+- Updated CHANGELOG.md with comprehensive v1.2.0 entry
+  * 145+ lines documenting all changes
+  * Impact assessment and rationale
+- Updated references/README.md to version 1.2.0
+
+Impact:
+- Coverage: 15 → 24 comprehensive rules
+- Professional quality: clickability, accessibility, SEO
+- Maintainability: auto-numbered lists
+- Standards: technical writing compliance
+- Size efficiency: SKILL.md +1.5 KB for 4 critical rules
+- Priority: HIGH - enterprise documentation standards
+
+Why This Matters:
+Version 1.2.0 transforms the skill from "technically correct" to
+"professionally excellent," addressing clickability (URL wrapping),
+accessibility (document structure, alt text), maintainability
+(auto-numbered lists), consistency (fence/heading styles), security
+(HTML guidance), and SEO (alt text, structure). Ensures AI-generated
+markdown meets enterprise documentation standards.
+
+Files Changed:
+- markdown/SKILL.md
+- markdown/README.md
+- markdown/references/README.md
+- markdown/references/complete-rules.md
+- markdown/references/examples.md
+- markdown/references/edge-cases.md
+- README.md
+- CHANGELOG.md
+- roadwork/test-plan-update-suggestions.md (new)
+
+Validation:
+All markdown files pass markdownlint with zero violations.
+All updates follow markdown skill guidelines strictly.
+
+Co-authored-by: Claude (Anthropic AI)
